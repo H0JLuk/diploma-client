@@ -1,0 +1,49 @@
+import { CreateTestDto, Test, UpdateTestDto } from '@/types';
+
+import { commonApi, providesList } from '../config/commonApi';
+import { transformErrorResponse } from './baseQuery';
+
+const testApiTag = 'test';
+
+export const testApi = commonApi.injectEndpoints({
+  endpoints: builder => ({
+    getTests: builder.query<Test[], number | void>({
+      query: subjectId => ({
+        url: subjectId ? `tests/subject/${subjectId}` : 'tests',
+        credentials: 'include',
+      }),
+      providesTags: result => providesList(result, testApiTag),
+    }),
+    createTest: builder.mutation<Test, CreateTestDto>({
+      query: body => ({
+        url: 'tests',
+        method: 'POST',
+        body,
+        credentials: 'include',
+      }),
+      transformErrorResponse,
+      invalidatesTags: result => (result ? [testApiTag] : []),
+    }),
+    updateTest: builder.mutation<Test, UpdateTestDto>({
+      query: ({ id, ...dto }) => ({
+        url: `tests/${id}`,
+        method: 'PUT',
+        body: dto,
+        credentials: 'include',
+      }),
+      transformErrorResponse,
+      invalidatesTags: (result, error, arg) => (result ? [{ type: testApiTag, id: arg.id }] : []),
+    }),
+    deleteTest: builder.mutation<void, number>({
+      query: testId => ({
+        url: `tests/${testId}`,
+        method: 'DELETE',
+        credentials: 'include',
+      }),
+      transformErrorResponse,
+      invalidatesTags: (result, error, arg) => (result ? [{ type: testApiTag, id: arg }] : []),
+    }),
+  }),
+});
+
+export const { useGetTestsQuery, useCreateTestMutation, useUpdateTestMutation, useDeleteTestMutation } = testApi;
