@@ -1,6 +1,6 @@
 import { User } from '.';
 
-export type SignUpRequestDto = {
+export type CreateUserDto = {
   name: User['name'];
   login: User['login'];
   password: string;

@@ -12,5 +12,5 @@
 }
 
 #__next {
-  @apply min-h-[100vh] flex flex-col;
+  @apply min-h-[100dvh] flex flex-col;
 }

@@ -1,8 +1,7 @@
 'use client';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Metadata } from 'next';
-import { FC, memo, useMemo, useReducer, useState } from 'react';
+import { FC, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Input, Modal } from '@/components/shared';
@@ -15,21 +14,16 @@ import {
   useGetSubjectsQuery,
   useUpdateSubjectMutation,
 } from '@/store/api/subjectApi';
-import { Test } from '@/types';
+import { Subject } from '@/types';
 
 import { validationSchema } from './validation';
-
-export const metadata: Metadata = {
-  title: 'Subject',
-  description: 'Subjects list page for system of testing knowledge',
-};
 
 type ModalState =
   | {
       isOpened: false;
     }
   | { isOpened: true; mode: 'create' }
-  | { isOpened: true; mode: 'edit'; subject: Test };
+  | { isOpened: true; mode: 'edit'; subject: Subject };
 
 const modalTitleTextByMode = {
   create: 'Создание предмета',
@@ -53,7 +47,7 @@ export const HomePageContainer: FC = () => {
         isOpened: true,
         mode: 'create',
       }),
-      openEditingSubject: (_, subject: Test) => {
+      openEditingSubject: (_, subject: Subject) => {
         formValues.setValue('name', subject.name);
         return { isOpened: true, mode: 'edit', subject };
       },
@@ -68,13 +62,13 @@ export const HomePageContainer: FC = () => {
     currentData: subjectData,
     isFetching: isGetSubjectsFetching,
     isError: isGetSubjectsError,
-  } = useGetSubjectsQuery();
+  } = useGetSubjectsQuery(undefined);
   const [createSubjectMutation, { isLoading: isCreatingLoading, error: creatingError }] = useCreateSubjectMutation();
   const [updateSubjectMutation, { isLoading: isUpdatingLoading, error: updatingError }] = useUpdateSubjectMutation();
   const [deleteSubjectMutation, { isLoading: isDeleteSubjectLoading }] = useDeleteSubjectMutation();
   const { data: userInfo } = useCheckAuthQuery();
 
-  const isNotStudent = userInfo?.role !== 'Student';
+  const isNotStudent = !!userInfo && userInfo?.role !== 'Student';
 
   const isFetching = isDeleteSubjectLoading || isGetSubjectsFetching;
 
@@ -117,11 +111,13 @@ export const HomePageContainer: FC = () => {
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5'>Subjects list</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>List of subjects</h3>
 
-      <Button className='self-end' onClick={openCreatingSubject}>
-        Create new subject
-      </Button>
+      {isNotStudent && (
+        <Button className='self-end' onClick={openCreatingSubject}>
+          Create new subject
+        </Button>
+      )}
 
       {subjectList}
 

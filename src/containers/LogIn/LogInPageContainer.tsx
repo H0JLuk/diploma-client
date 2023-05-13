@@ -24,7 +24,9 @@ export const LogInPageContainer: FC = () => {
   };
 
   return (
-    <div className='flex justify-center items-center flex-grow-[1]'>
+    <div className='flex justify-center items-center flex-col flex-grow-[1]'>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Log In form</h3>
+
       <form className='m-8' onSubmit={handleSubmit(handleSubmitQuery)}>
         {Object.entries(signUpFields).map(([name, field]) => (
           <Input {...field} {...register(name)} key={field.id} error={formState.errors[name]?.message} />
@@ -32,7 +34,7 @@ export const LogInPageContainer: FC = () => {
 
         {isError && <p className='text-[red]'>{String(error)}</p>}
         <Button type='submit' isLoading={isLoading}>
-          Sign&nbsp;up
+          Log&nbsp;in
         </Button>
       </form>
     </div>

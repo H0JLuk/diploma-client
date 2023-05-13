@@ -3,7 +3,6 @@ import { Mutex } from 'async-mutex';
 import { IncomingMessage } from 'http';
 import { AppContext } from 'next/app';
 import type { NextPageContext } from 'next/types';
-import type { Context } from 'next-redux-wrapper';
 
 const baseUrl = `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/api/`;
 
@@ -21,22 +20,16 @@ const baseQuery = fetchBaseQuery({
   //   const ctx = api.extra;
   //   let req: IncomingMessage | undefined;
 
-  //   console.log('prepare');
-
   //   if (isNextPageContext(ctx)) {
-  //     console.log('is next page context');
   //     req = ctx.req;
   //   } else if (isAppContext(ctx)) {
-  //     console.log('is app context');
   //     req = ctx.ctx.req;
   //   }
 
   //   if (req) {
-  //     console.log('is req');
   //     headers.set('Cookie', req.headers.cookie || '');
   //   }
 
-  //   console.log('headers', headers);
   //   return headers;
   // },
 });
@@ -80,5 +73,6 @@ export const transformErrorResponse = (err: FetchBaseQueryError): string => {
   if (typeof err.data === 'object' && err.data && 'message' in err.data) {
     return err.data.message as string;
   }
+
   return typeof err.data === 'string' ? err.data : 'Server error...';
 };

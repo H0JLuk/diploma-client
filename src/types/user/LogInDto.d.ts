@@ -1,6 +1,6 @@
 import { User } from '.';
 
-export type LogInRequestDto = {
+export type LogInDto = {
   login: User['login'];
   password: string;
 };

@@ -1,17 +1,17 @@
 import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
-import { Subject } from '@/types';
+import { Test } from '@/types';
 
 import { Routes } from '../Navbar/navRoutes';
 import { Button } from '../shared';
 
-type SubjectItemProps = {
-  subject: Subject;
+type TestItemProps = {
+  test: Test;
   isFetching: boolean;
   isNotStudent: boolean;
-  onEditSubject: (subject: Subject) => void;
-  onDeleteSubject: (subjectId: number) => void;
+  onEditTest: (test: Test) => void;
+  onDeleteTest: (testId: number) => void;
 };
 
 const cardColorByIndex = {
@@ -20,50 +20,39 @@ const cardColorByIndex = {
   2: '#ECEEFF',
 };
 
-export const SubjectItem: FC<SubjectItemProps> = ({
-  subject,
-  isFetching,
-  isNotStudent,
-  onEditSubject,
-  onDeleteSubject,
-}) => {
+export const TestItem: FC<TestItemProps> = ({ test, isFetching, isNotStudent, onEditTest, onDeleteTest }) => {
   const router = useRouter();
 
   return (
     <div className='pr-5 pb-5 xs:max-w-[400px] w-full'>
       <div
-        className={`bg-[${cardColorByIndex[(subject.id % 3) as keyof typeof cardColorByIndex]}] rounded-xl`}
-        key={subject.id}
+        className={`bg-[${cardColorByIndex[(test.id % 3) as keyof typeof cardColorByIndex]}] rounded-xl`}
+        key={test.id}
       >
         <div className='flex flex-col relative p-8 rounded-xl bg-white shadow-xl translate-x-4 translate-y-4 '>
           {isNotStudent && (
             <>
-              <Button variant='clear' onClick={() => onEditSubject(subject)} className='absolute top-3 right-10'>
+              <Button variant='clear' onClick={() => onEditTest(test)} className='absolute top-3 right-10'>
                 &#9998;
               </Button>
               <Button
                 variant='clear'
                 disabled={isFetching}
-                onClick={() => onDeleteSubject(subject.id)}
+                onClick={() => onDeleteTest(test.id)}
                 className='absolute top-3 right-3'
               >
                 &#x2715;
               </Button>
             </>
           )}
-
-          <div className='mt-3 font-semibold text-lg'>{subject.name}</div>
-          {!!subject.testsLength && (
-            <div className='text-sm font-light'>
-              {subject.testsLength} test{subject.testsLength > 1 && 's'}
-            </div>
-          )}
+          <div className='mt-3 font-semibold text-lg'>{test.name}</div>
+          {/* <div className='text-sm font-light w-60 md:w-auto'>Unlimited calls</div> */}
 
           <Button
-            onClick={() => router.push(`${Routes.TESTS}/?subjectId=${subject.id}`)}
+            onClick={() => router.push(`${Routes.TESTS}/?subjectId=${test.id}`)}
             className='mt-4 self-start inline-block'
           >
-            Open tests
+            Start passing the test
           </Button>
         </div>
       </div>

@@ -7,7 +7,7 @@ const testApiTag = 'test';
 
 export const testApi = commonApi.injectEndpoints({
   endpoints: builder => ({
-    getTests: builder.query<Test[], number | void>({
+    getTests: builder.query<Test[], number | null>({
       query: subjectId => ({
         url: subjectId ? `tests/subject/${subjectId}` : 'tests',
         credentials: 'include',
@@ -22,7 +22,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: result => (result ? [testApiTag] : []),
+      invalidatesTags: (_, err) => (err ? [] : [testApiTag]),
     }),
     updateTest: builder.mutation<Test, UpdateTestDto>({
       query: ({ id, ...dto }) => ({
@@ -32,7 +32,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (result, error, arg) => (result ? [{ type: testApiTag, id: arg.id }] : []),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testApiTag, id: arg.id }]),
     }),
     deleteTest: builder.mutation<void, number>({
       query: testId => ({
@@ -41,7 +41,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (result, error, arg) => (result ? [{ type: testApiTag, id: arg }] : []),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testApiTag, id: arg }]),
     }),
   }),
 });

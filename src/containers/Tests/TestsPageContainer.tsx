@@ -1,141 +1,79 @@
 'use client';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Metadata } from 'next';
-import { FC, memo, useMemo, useReducer, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { FC, useCallback, useMemo } from 'react';
 
-import { Button, Input, Modal } from '@/components/shared';
-import { SubjectList } from '@/components/Subjects';
-import { useMethods } from '@/hooks/useMethods';
+import { Routes } from '@/components/Navbar/navRoutes';
+import { Button } from '@/components/shared';
+import { TestList } from '@/components/Tests';
 import { useCheckAuthQuery } from '@/store/api/authApi';
-import {
-  useCreateTestMutation,
-  useDeleteTestMutation,
-  useGetTestsQuery,
-  useUpdateTestMutation,
-} from '@/store/api/testApi';
+import { useGetSubjectQuery } from '@/store/api/subjectApi';
+import { useDeleteTestMutation, useGetTestsQuery } from '@/store/api/testApi';
 import { Test } from '@/types';
 
-import { validationSchema } from './validation';
-
-type ModalState =
-  | {
-      isOpened: false;
-    }
-  | { isOpened: true; mode: 'create' }
-  | { isOpened: true; mode: 'edit'; test: Test };
-
-const modalTitleTextByMode = {
-  create: 'Создание теста',
-  edit: 'Редактирование теста',
-};
-
-const formId = 'tests-form';
-
 export const TestsPageContainer: FC = () => {
-  const formValues = useForm<{ name: string }>({
-    defaultValues: { name: '' },
-    resolver: yupResolver(validationSchema),
-  });
+  const router = useRouter();
+  const pageParams = useSearchParams();
 
-  const [modalState, { openCreatingTest, openEditingTest, closeModal }] = useMethods({
-    initialState: {
-      isOpened: false,
-    } as ModalState,
-    methods: {
-      openCreatingTest: _ => ({
-        isOpened: true,
-        mode: 'create',
-      }),
-      openEditingTest: (_, test: Test) => {
-        formValues.setValue('name', test.name);
-        return { isOpened: true, mode: 'edit', test };
-      },
-      closeModal: _ => {
-        formValues.reset();
-        return { isOpened: false };
-      },
-    },
-  });
+  const subjectIdFromParams = Number.isInteger(Number(pageParams.get('subjectId')))
+    ? +pageParams.get('subjectId')!
+    : null;
 
-  const { currentData: testData, isFetching: isGetTestFetching, isError: isGetTestsError } = useGetTestsQuery();
-  const [createTestMutation, { isLoading: isCreatingLoading, error: creatingError }] = useCreateTestMutation();
-  const [updateTestMutation, { isLoading: isUpdatingLoading, error: updatingError }] = useUpdateTestMutation();
+  const {
+    currentData: testData,
+    isFetching: isGetTestFetching,
+    isError: isGetTestsError,
+  } = useGetTestsQuery(subjectIdFromParams);
+  const { currentData: testSubject } = useGetSubjectQuery(subjectIdFromParams as number, {
+    skip: !subjectIdFromParams,
+  });
   const [deleteTestMutation, { isLoading: isDeleteTestLoading }] = useDeleteTestMutation();
   const { data: userInfo } = useCheckAuthQuery();
 
-  const isNotStudent = userInfo?.role !== 'Student';
+  const isNotStudent = !!userInfo && userInfo?.role !== 'Student';
 
   const isFetching = isDeleteTestLoading || isGetTestFetching;
 
-  const handleSubmit: Parameters<typeof formValues.handleSubmit>[0] = async data => {
-    if (!modalState.isOpened) return;
-    const { name } = data;
+  const handleCreateTest = () => router.push(`${Routes.TESTS}/create`);
 
-    try {
-      if (modalState.mode === 'create') {
-        await createTestMutation({ name }).unwrap();
-      } else {
-        await updateTestMutation({ id: modalState.test.id, name }).unwrap();
-      }
-      closeModal();
-    } catch {
-      /* empty */
-    }
-  };
+  const handleEditTestClick = useCallback(
+    (test: Test) => {
+      router.push(`${Routes.TESTS}/edit/${test.id}`);
+    },
+    [router],
+  );
 
   const testList = useMemo(
     () => (
-      <SubjectList
-        subjects={testData}
+      <TestList
+        tests={testData}
         isFetching={isFetching}
         isError={isGetTestsError}
         isNotStudent={isNotStudent}
-        onEditSubject={openEditingTest}
-        onDeleteSubject={deleteTestMutation}
+        onEditTest={handleEditTestClick}
+        onDeleteTest={deleteTestMutation}
       />
     ),
-    [deleteTestMutation, isFetching, isGetTestsError, isNotStudent, openEditingTest, testData],
+    [deleteTestMutation, isFetching, isGetTestsError, isNotStudent, testData, handleEditTestClick],
   );
 
-  const modalTitleText = modalState.isOpened ? modalTitleTextByMode[modalState.mode] : '';
-  const formServerError = (() => {
-    if (!modalState.isOpened) return null;
-    if (modalState.mode === 'create') return creatingError && String(creatingError);
-    if (modalState.mode === 'edit') return updatingError && String(updatingError);
-  })();
+  if (!testSubject && subjectIdFromParams) {
+    return <div>Incorrect subject :(</div>;
+  }
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5'>Tests list</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>
+        List of tests {!!testSubject && `by subject "${testSubject.name}"`}
+      </h3>
 
-      <Button className='self-end' onClick={openCreatingTest}>
-        Create new test
-      </Button>
+      {isNotStudent && (
+        <Button className='self-end' onClick={handleCreateTest}>
+          Create new test
+        </Button>
+      )}
 
       {testList}
-
-      <Modal
-        titleText={modalTitleText}
-        acceptBtnText='Save'
-        declineBtnText='Close'
-        onClose={closeModal}
-        isOpened={modalState.isOpened}
-        formId={formId}
-        onSubmit={formValues.handleSubmit(handleSubmit)}
-        isLoading={isCreatingLoading || isUpdatingLoading}
-      >
-        <form id={formId} onSubmit={formValues.handleSubmit(handleSubmit)}>
-          <Input
-            labelText='Название теста'
-            placeholder='Название теста'
-            {...formValues.register('name')}
-            error={formValues.formState.errors.name?.message}
-          />
-          <p className='text-[red]'>{formServerError}</p>
-        </form>
-      </Modal>
     </main>
   );
 };

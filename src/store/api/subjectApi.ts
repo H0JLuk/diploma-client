@@ -12,6 +12,13 @@ export const subjectApi = commonApi.injectEndpoints({
       }),
       providesTags: result => providesList(result, 'subject'),
     }),
+    getSubject: builder.query<Subject, number>({
+      query: id => ({
+        url: `subjects/${id}`,
+        credentials: 'include',
+      }),
+      providesTags: (result, error, id) => providesList([{ id }], 'subject'),
+    }),
     createSubject: builder.mutation<Subject, CreateSubjectDto>({
       query: body => ({
         url: 'subjects',
@@ -20,7 +27,7 @@ export const subjectApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: result => (result ? ['subject'] : []),
+      invalidatesTags: (_, err) => (err ? [] : [{ type: 'subject', id: 'LIST' }]),
     }),
     updateSubject: builder.mutation<Subject, UpdateSubjectDto>({
       query: ({ id, ...dto }) => ({
@@ -30,7 +37,7 @@ export const subjectApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (result, error, arg) => (result ? [{ type: 'subject', id: arg.id }] : []),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: 'subject', id: arg.id }]),
     }),
     deleteSubject: builder.mutation<Subject, number>({
       query: subjectId => ({
@@ -39,10 +46,15 @@ export const subjectApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (result, error, arg) => (result ? [{ type: 'subject', id: arg }] : []),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: 'subject', id: arg }]),
     }),
   }),
 });
 
-export const { useGetSubjectsQuery, useCreateSubjectMutation, useUpdateSubjectMutation, useDeleteSubjectMutation } =
-  subjectApi;
+export const {
+  useGetSubjectsQuery,
+  useGetSubjectQuery,
+  useCreateSubjectMutation,
+  useUpdateSubjectMutation,
+  useDeleteSubjectMutation,
+} = subjectApi;

@@ -1,17 +1,16 @@
 import { createApi } from '@reduxjs/toolkit/dist/query/react';
-import { REHYDRATE } from 'redux-persist';
+import { HYDRATE } from 'next-redux-wrapper';
 
 import { baseQueryWithReauth } from '../api/baseQuery';
 
-const tagTypes = ['current-user', 'subject', 'test'] as const;
+const tagTypes = ['current-user', 'subject', 'test', 'users'] as const;
 
 export const commonApi = createApi({
   reducerPath: 'commonApi',
   baseQuery: baseQueryWithReauth,
   tagTypes,
   extractRehydrationInfo(action, { reducerPath }) {
-    if (action.type === REHYDRATE) {
-      console.log('rehydrate!!!');
+    if (action.type === HYDRATE) {
       return action.payload[reducerPath];
     }
   },

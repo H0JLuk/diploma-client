@@ -37,7 +37,7 @@ export const Navbar: FC = () => {
             type='button'
             onClick={handleToggleNavbar}
           >
-            <Image src={menuSvg} width={30} height={30} alt='navbar' />
+            <Image src={menuSvg} priority={false} width={30} height={30} alt='navbar' />
           </button>
         </div>
         <div className={`lg:flex flex-grow items-center ${isNavbarOpened ? 'flex' : 'hidden'}`}>

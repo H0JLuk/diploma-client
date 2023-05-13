@@ -63,7 +63,7 @@ export const Modal: FC<ModalProps> = ({
         <div className='p-6'>{children}</div>
         {/* Modal footer */}
         <div className='flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b'>
-          <Button form={formId} onClick={onSubmit} isLoading={isLoading}>
+          <Button form={formId} type={formId ? 'submit' : 'button'} onClick={onSubmit} isLoading={isLoading}>
             {acceptBtnText}
           </Button>
           <Button onClick={onClose} variant='outlined'>

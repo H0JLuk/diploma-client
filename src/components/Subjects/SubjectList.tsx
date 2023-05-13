@@ -1,15 +1,15 @@
 import { FC } from 'react';
 
-import { Test } from '@/types';
+import { Subject } from '@/types';
 
 import { SubjectItem } from './SubjectItem';
 
 type SubjectListProps = {
-  subjects?: Test[];
+  subjects?: Subject[];
   isFetching: boolean;
   isError: boolean;
   isNotStudent: boolean;
-  onEditSubject: (subject: Test) => void;
+  onEditSubject: (subject: Subject) => void;
   onDeleteSubject: (subjectId: number) => void;
 };
 
