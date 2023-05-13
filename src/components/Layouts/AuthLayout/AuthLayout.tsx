@@ -1,4 +1,3 @@
-import ErrorPage from 'next/error';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, PropsWithChildren, useMemo } from 'react';
 
@@ -34,18 +33,18 @@ export const AuthLayout: FC<AuthLayoutProps> = ({ pagePermission, children }) =>
     const onHomePage = pathname === Routes.HOME;
     if (isAuthorized && !isAuthAndNotAcceptedRole && !onHomePage) {
       router.push(Routes.HOME);
-      console.log('go home');
+      console.info('go home');
       return <Loader />;
     }
 
     if (isAuthError && pagePermission !== 'unauthorized' && pagePermission !== 'common') {
       router.push(Routes.LOG_IN);
-      console.log('go log in');
+      console.info('go log in');
       return <Loader />;
     }
 
     if (isAuthorized && pagePermission === 'unauthorized') {
-      console.log('just go home, anon');
+      console.info('just go home, anon');
       router.push(Routes.HOME);
       return <Loader />;
     }

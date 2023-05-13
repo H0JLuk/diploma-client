@@ -1,9 +1,9 @@
-export type { ChangeInfoDto } from './ChangeInfoDto';
-export type { ChangeUserRoleDto } from './ChangeUserRoleDto';
-export type { CreateUserDto } from './CreateUserDto';
-export type { LogInDto } from './LogInDto';
-export type { SignUpDto } from './SignUpDto';
-export type { User, UserRoles } from './User';
+export type { ChangeInfoDto } from './ChangeInfoDto.d';
+export type { ChangeUserRoleDto } from './ChangeUserRoleDto.d';
+export type { CreateUserDto } from './CreateUserDto.d';
+export type { LogInDto } from './LogInDto.d';
+export type { SignUpDto } from './SignUpDto.d';
+export type { User, UserRoles } from './User.d';
 
 export enum UserRolesEnum {
   Student = 'Student',

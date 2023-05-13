@@ -1,20 +1,29 @@
 import { FC, useMemo } from 'react';
 
 import { StudentList } from '@/components/Students';
-import { useBanUserMutation, useGetUsersQuery } from '@/store/api/userApi';
+import { useBanStudentMutation, useGetStudentsQuery } from '@/store/api/userApi';
 
 export const StudentsPageContainer: FC = () => {
-  const { currentData: usersData, isError: isGetUsersError, isFetching: isGetUsersFetching } = useGetUsersQuery();
+  const {
+    currentData: studentsData,
+    isError: isGetStudentsError,
+    isFetching: isGetStudentsFetching,
+  } = useGetStudentsQuery();
 
-  const [banUserMutation, { isLoading: isBanUserLoading }] = useBanUserMutation();
+  const [banStudentMutation, { isLoading: isBanStudentLoading }] = useBanStudentMutation();
 
-  const isFetching = isBanUserLoading || isGetUsersFetching;
+  const isFetching = isBanStudentLoading || isGetStudentsFetching;
 
   const studentsList = useMemo(
     () => (
-      <StudentList students={usersData} isFetching={isFetching} isError={isGetUsersError} onBanUser={banUserMutation} />
+      <StudentList
+        students={studentsData}
+        isFetching={isFetching}
+        isError={isGetStudentsError}
+        onBanStudent={banStudentMutation}
+      />
     ),
-    [usersData, isFetching, isGetUsersError, banUserMutation],
+    [studentsData, isFetching, isGetStudentsError, banStudentMutation],
   );
 
   return (

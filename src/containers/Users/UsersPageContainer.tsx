@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 
 import { Button, Input, Modal } from '@/components/shared';
-import {} from '@/components/Users';
+import { UserList } from '@/components/Users';
 import { useMethods } from '@/hooks/useMethods';
 import {
   useBanUserMutation,
@@ -55,7 +55,7 @@ export const UsersPageContainer: FC = () => {
 
   const usersList = useMemo(
     () => (
-      <UsersList
+      <UserList
         users={usersData}
         isFetching={isFetching}
         isError={isGetUsersError}
@@ -114,7 +114,7 @@ export const UsersPageContainer: FC = () => {
             <p className='text-[red]'>{formValues.formState.errors.role?.message}</p>
           </fieldset>
 
-          <p className='text-[red] mt-4'>{String(creatingUserError)}</p>
+          {creatingUserError && <p className='text-[red] mt-4'>{String(creatingUserError)}</p>}
         </form>
       </Modal>
     </main>
