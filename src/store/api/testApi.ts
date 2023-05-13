@@ -14,6 +14,13 @@ export const testApi = commonApi.injectEndpoints({
       }),
       providesTags: result => providesList(result, testApiTag),
     }),
+    getTest: builder.query<Test, number>({
+      query: testId => ({
+        url: `tests/${testId}`,
+        credentials: 'include',
+      }),
+      providesTags: result => providesList(result, testApiTag),
+    }),
     createTest: builder.mutation<Test, CreateTestDto>({
       query: body => ({
         url: 'tests',

@@ -3,7 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import { baseQueryWithReauth } from '../api/baseQuery';
 
-const tagTypes = ['current-user', 'subject', 'test', 'user'] as const;
+const tagTypes = ['current-user', 'subject', 'test', 'user', 'question', 'answer', 'questionType'] as const;
 
 export const commonApi = createApi({
   reducerPath: 'commonApi',

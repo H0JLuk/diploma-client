@@ -1,6 +1,10 @@
-import { Test } from './Test';
+import { Test } from './Test.d';
 
 export type UpdateTestDto = {
   id: Test['id'];
-  name: Test['name'];
+  name?: Test['name'];
+  startTime?: Test['startTime'];
+  endTime?: Test['endTime'];
+  duration?: Test['duration'];
+  isRandomAnswers?: Test['isRandomAnswers'];
 };
