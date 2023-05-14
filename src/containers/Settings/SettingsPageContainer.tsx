@@ -35,9 +35,15 @@ export const SettingsPageContainer: FC = () => {
     <div className='flex justify-center items-center flex-col'>
       <h3 className='text-2xl mt-2 mb-5 text-center'>User settings</h3>
 
-      <form className='m-8' onSubmit={handleSubmit(handleSubmitQuery)}>
+      <form className='m-8 max-w-[300px] w-full' onSubmit={handleSubmit(handleSubmitQuery)}>
         {Object.entries(settingsFields).map(([name, field]) => (
-          <Input {...field} {...register(name)} key={field.id} error={formState.errors[name]?.message} />
+          <Input
+            {...field}
+            {...register(name)}
+            customClass='w-full'
+            key={field.id}
+            error={formState.errors[name]?.message}
+          />
         ))}
 
         {isError && <p className='text-[red]'>{String(error)}</p>}

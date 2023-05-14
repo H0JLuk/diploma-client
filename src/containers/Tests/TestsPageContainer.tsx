@@ -1,5 +1,3 @@
-'use client';
-
 import { useRouter, useSearchParams } from 'next/navigation';
 import { FC, useCallback, useMemo } from 'react';
 
@@ -28,7 +26,7 @@ export const TestsPageContainer: FC = () => {
     skip: !subjectIdFromParams,
   });
   const [deleteTestMutation, { isLoading: isDeleteTestLoading }] = useDeleteTestMutation();
-  const { data: userInfo } = useCheckAuthQuery();
+  const { currentData: userInfo } = useCheckAuthQuery();
 
   const isNotStudent = !!userInfo && userInfo?.role !== 'Student';
 

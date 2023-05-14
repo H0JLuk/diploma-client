@@ -7,7 +7,7 @@ export type SettingsFormData = Record<SettingsFieldsNames, string>;
 export const settingsFields = {
   name: {
     labelText: 'Name',
-    id: 'login',
+    id: 'name',
     placeholder: 'Name',
     autoFocus: true,
   },

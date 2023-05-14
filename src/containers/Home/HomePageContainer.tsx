@@ -1,5 +1,3 @@
-'use client';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FC, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
@@ -66,7 +64,7 @@ export const HomePageContainer: FC = () => {
   const [createSubjectMutation, { isLoading: isCreatingLoading, error: creatingError }] = useCreateSubjectMutation();
   const [updateSubjectMutation, { isLoading: isUpdatingLoading, error: updatingError }] = useUpdateSubjectMutation();
   const [deleteSubjectMutation, { isLoading: isDeleteSubjectLoading }] = useDeleteSubjectMutation();
-  const { data: userInfo } = useCheckAuthQuery();
+  const { currentData: userInfo } = useCheckAuthQuery();
 
   const isNotStudent = !!userInfo && userInfo?.role !== 'Student';
 
@@ -136,6 +134,7 @@ export const HomePageContainer: FC = () => {
             labelText='Название предмета'
             placeholder='Название предмета'
             {...formValues.register('name')}
+            customClass='w-full'
             error={formValues.formState.errors.name?.message}
           />
           <p className='text-[red]'>{formServerError}</p>

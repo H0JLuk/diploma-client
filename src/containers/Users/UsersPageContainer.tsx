@@ -90,6 +90,7 @@ export const UsersPageContainer: FC = () => {
             <Input
               {...field}
               {...formValues.register(name)}
+              customClass='w-full'
               key={field.id}
               error={formValues.formState.errors[name]?.message}
             />
