@@ -1,10 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import Select from 'react-select';
 
 import { Button, Input } from '@/components/shared';
 import { useGetSubjectsQuery } from '@/store/api/subjectApi';
+import { CreateTestDto, UpdateTestDto } from '@/types';
 
 import { QuestionListForm } from './QuestionListForm';
 import { TestFormValues } from './types';
@@ -12,11 +13,12 @@ import { validationSchema } from './validation';
 
 type CreateEditTestFormProps = {
   defaultFormValues: TestFormValues;
+  isLoading: boolean;
   mode: 'create' | 'edit';
-  onSave: (data: TestFormValues) => void;
+  onSave: (data: CreateTestDto | UpdateTestDto) => void;
 };
 
-export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormValues, mode, onSave }) => {
+export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormValues, isLoading, mode, onSave }) => {
   const { currentData: subjectData = [] } = useGetSubjectsQuery();
 
   const subjectOptions = useMemo(() => subjectData.map(({ id, name }) => ({ value: id, label: name })), [subjectData]);
@@ -26,9 +28,17 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
     resolver: yupResolver(validationSchema),
   });
 
+  useEffect(() => {
+    formMethods.reset(defaultFormValues);
+  }, [defaultFormValues]);
+
   const handleSubmit = (data: TestFormValues) => {
-    console.log('data', data);
-    onSave(data);
+    onSave({
+      ...data,
+      startTime: data.startTime.toISOString(),
+      endTime: data.endTime.toISOString(),
+      subjectId: data.subjectId!,
+    });
   };
 
   return (
@@ -39,9 +49,10 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
         autoComplete='off'
         customClass='w-full'
         placeholder='Type title...'
+        error={formMethods.formState.errors.name?.message}
         id='name'
       />
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+
       <label htmlFor='subject-select'>
         <p className='mb-2'>Select subject </p>
         <Controller
@@ -64,14 +75,17 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       </label>
       <Input
         {...formMethods.register('startTime')}
+        value={formMethods.watch('startTime')?.toISOString?.().slice(0, 16)}
         labelText='Testing start time'
         customClass='w-full'
         id='start-time'
         type='datetime-local'
         error={formMethods.formState.errors.startTime?.message}
       />
+
       <Input
         {...formMethods.register('endTime')}
+        value={formMethods.watch('endTime')?.toISOString?.().slice(0, 16)}
         labelText='Testing end time'
         customClass='w-full'
         id='end-time'
@@ -108,7 +122,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <QuestionListForm formMethods={formMethods} />
 
-      <Button type='submit' className='justify-center text-[20px] font-semibold'>
+      <Button type='submit' isLoading={isLoading} className='justify-center text-[20px] font-semibold'>
         {mode === 'create' ? 'Create test' : 'Edit test'}
       </Button>
     </form>

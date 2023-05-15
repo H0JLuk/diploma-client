@@ -8,7 +8,7 @@ type SubjectListProps = {
   subjects?: Subject[];
   isFetching: boolean;
   isError: boolean;
-  isNotStudent: boolean;
+  hasMethodistPermissions: boolean;
   onEditSubject: (subject: Subject) => void;
   onDeleteSubject: (subjectId: number) => void;
 };
@@ -17,7 +17,7 @@ export const SubjectList: FC<SubjectListProps> = ({
   subjects,
   isFetching,
   isError,
-  isNotStudent,
+  hasMethodistPermissions,
   onEditSubject,
   onDeleteSubject,
 }) => (
@@ -30,7 +30,7 @@ export const SubjectList: FC<SubjectListProps> = ({
           subject={subject}
           key={subject.id}
           isFetching={isFetching}
-          isNotStudent={isNotStudent}
+          hasMethodistPermissions={hasMethodistPermissions}
           onEditSubject={onEditSubject}
           onDeleteSubject={onDeleteSubject}
         />

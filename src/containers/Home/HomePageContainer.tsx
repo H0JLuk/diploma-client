@@ -64,9 +64,9 @@ export const HomePageContainer: FC = () => {
   const [createSubjectMutation, { isLoading: isCreatingLoading, error: creatingError }] = useCreateSubjectMutation();
   const [updateSubjectMutation, { isLoading: isUpdatingLoading, error: updatingError }] = useUpdateSubjectMutation();
   const [deleteSubjectMutation, { isLoading: isDeleteSubjectLoading }] = useDeleteSubjectMutation();
-  const { currentData: userInfo } = useCheckAuthQuery();
+  const { currentData: userInfo, isSuccess: isAuthorized } = useCheckAuthQuery();
 
-  const isNotStudent = !!userInfo && userInfo?.role !== 'Student';
+  const hasMethodistPermissions = isAuthorized && !!userInfo && userInfo?.role !== 'Student';
 
   const isFetching = isDeleteSubjectLoading || isGetSubjectsFetching;
 
@@ -92,12 +92,12 @@ export const HomePageContainer: FC = () => {
         subjects={subjectData}
         isFetching={isFetching}
         isError={isGetSubjectsError}
-        isNotStudent={isNotStudent}
+        hasMethodistPermissions={hasMethodistPermissions}
         onEditSubject={openEditingSubject}
         onDeleteSubject={deleteSubjectMutation}
       />
     ),
-    [deleteSubjectMutation, isFetching, isGetSubjectsError, isNotStudent, openEditingSubject, subjectData],
+    [deleteSubjectMutation, isFetching, isGetSubjectsError, hasMethodistPermissions, openEditingSubject, subjectData],
   );
 
   const modalTitleText = modalState.isOpened ? modalTitleTextByMode[modalState.mode] : '';
@@ -111,7 +111,7 @@ export const HomePageContainer: FC = () => {
     <main className='flex flex-col items-center flex-grow-[1]'>
       <h3 className='text-2xl mt-2 mb-5 text-center'>List of subjects</h3>
 
-      {isNotStudent && (
+      {hasMethodistPermissions && (
         <Button className='self-end' onClick={openCreatingSubject}>
           Create new subject
         </Button>

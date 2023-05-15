@@ -53,4 +53,10 @@ export const testApi = commonApi.injectEndpoints({
   }),
 });
 
-export const { useGetTestsQuery, useCreateTestMutation, useUpdateTestMutation, useDeleteTestMutation } = testApi;
+export const {
+  useGetTestsQuery,
+  useGetTestQuery,
+  useCreateTestMutation,
+  useUpdateTestMutation,
+  useDeleteTestMutation,
+} = testApi;

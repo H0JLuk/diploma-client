@@ -1,2 +1,2 @@
-export { CreateEditTestForm } from './CreateEditForm';
+export { CreateEditTestForm } from './CreateEditTestForm';
 export type { TestFormValues } from './types';

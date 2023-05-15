@@ -1,26 +1,24 @@
 import { CreateAnswerDto, CreateQuestionDto } from '@/types';
 
-type GeneratedId = string;
-type CreatedId = number;
-
 export type AnswerFormValues = {
-  id?: GeneratedId | CreatedId;
+  id?: number;
   text: CreateAnswerDto['text'];
   isRight: CreateAnswerDto['isRight'];
 };
 
 export type QuestionFormValues = {
-  id?: GeneratedId | CreatedId;
+  id?: number;
   text: CreateQuestionDto['text'];
   type: CreateQuestionDto['type'];
   answers: AnswerFormValues[];
 };
 
 export type TestFormValues = {
+  id?: number;
   name: string;
   startTime: Date;
   endTime: Date;
-  duration?: string;
+  duration?: number;
   isRandomAnswers: boolean;
   hidden: boolean;
   subjectId?: number;

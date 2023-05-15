@@ -97,14 +97,17 @@ export const UsersPageContainer: FC = () => {
           ))}
 
           <fieldset>
+            <label className='mb-0.5' htmlFor='role-select'>
+              Role
+            </label>
             <Controller
               name='role'
               control={formValues.control}
               render={({ field }) => (
                 <Select
                   isSearchable={false}
+                  inputId='role-select'
                   options={selectOptions}
-                  value={{ label: field.value as string, value: field.value as string }}
                   onChange={option => field.onChange(option!.value)}
                   ref={field.ref}
                   placeholder='Select user role'

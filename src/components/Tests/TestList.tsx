@@ -8,12 +8,19 @@ type TestListProps = {
   tests?: Test[];
   isFetching: boolean;
   isError: boolean;
-  isNotStudent: boolean;
+  hasMethodistPermissions: boolean;
   onEditTest: (test: Test) => void;
   onDeleteTest: (testId: number) => void;
 };
 
-export const TestList: FC<TestListProps> = ({ tests, isFetching, isError, isNotStudent, onEditTest, onDeleteTest }) => (
+export const TestList: FC<TestListProps> = ({
+  tests,
+  isFetching,
+  isError,
+  hasMethodistPermissions,
+  onEditTest,
+  onDeleteTest,
+}) => (
   <>
     {isFetching && <p>Loading...</p>}
     {isError && <p>Oops, something went wrong...</p>}
@@ -23,7 +30,7 @@ export const TestList: FC<TestListProps> = ({ tests, isFetching, isError, isNotS
           test={test}
           key={test.id}
           isFetching={isFetching}
-          isNotStudent={isNotStudent}
+          hasMethodistPermissions={hasMethodistPermissions}
           onEditTest={onEditTest}
           onDeleteTest={onDeleteTest}
         />

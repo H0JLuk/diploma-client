@@ -7,4 +7,5 @@ export type UpdateTestDto = {
   endTime?: Test['endTime'];
   duration?: Test['duration'];
   isRandomAnswers?: Test['isRandomAnswers'];
+  hidden?: Test['hidden'];
 };

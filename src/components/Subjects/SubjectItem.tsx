@@ -9,7 +9,7 @@ import { Button } from '../shared';
 type SubjectItemProps = {
   subject: Subject;
   isFetching: boolean;
-  isNotStudent: boolean;
+  hasMethodistPermissions: boolean;
   onEditSubject: (subject: Subject) => void;
   onDeleteSubject: (subjectId: number) => void;
 };
@@ -23,7 +23,7 @@ const cardColorByIndex = {
 export const SubjectItem: FC<SubjectItemProps> = ({
   subject,
   isFetching,
-  isNotStudent,
+  hasMethodistPermissions,
   onEditSubject,
   onDeleteSubject,
 }) => {
@@ -36,7 +36,7 @@ export const SubjectItem: FC<SubjectItemProps> = ({
         key={subject.id}
       >
         <div className='flex flex-col relative p-8 rounded-xl bg-white shadow-xl translate-x-4 translate-y-4 '>
-          {isNotStudent && (
+          {hasMethodistPermissions && (
             <>
               <Button variant='clear' onClick={() => onEditSubject(subject)} className='absolute top-3 right-10'>
                 &#9998;

@@ -29,7 +29,7 @@ export const Navbar: FC = () => {
         <div className='w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start'>
           <div className='flex items-center'>
             <Image width={30} height={30} src={bookIcon} alt='logo' />
-            <p className='ml-4 text-white'>{userData?.name}</p>
+            <p className='ml-4 text-white'>{isAuthorized && userData?.name}</p>
           </div>
 
           <button

@@ -26,9 +26,9 @@ export const TestsPageContainer: FC = () => {
     skip: !subjectIdFromParams,
   });
   const [deleteTestMutation, { isLoading: isDeleteTestLoading }] = useDeleteTestMutation();
-  const { currentData: userInfo } = useCheckAuthQuery();
+  const { currentData: userInfo, isSuccess: isAuthorized } = useCheckAuthQuery();
 
-  const isNotStudent = !!userInfo && userInfo?.role !== 'Student';
+  const hasMethodistPermissions = isAuthorized && !!userInfo && userInfo?.role !== 'Student';
 
   const isFetching = isDeleteTestLoading || isGetTestFetching;
 
@@ -47,12 +47,12 @@ export const TestsPageContainer: FC = () => {
         tests={testData}
         isFetching={isFetching}
         isError={isGetTestsError}
-        isNotStudent={isNotStudent}
+        hasMethodistPermissions={hasMethodistPermissions}
         onEditTest={handleEditTestClick}
         onDeleteTest={deleteTestMutation}
       />
     ),
-    [deleteTestMutation, isFetching, isGetTestsError, isNotStudent, testData, handleEditTestClick],
+    [deleteTestMutation, isFetching, isGetTestsError, hasMethodistPermissions, testData, handleEditTestClick],
   );
 
   if (!testSubject && subjectIdFromParams) {
@@ -65,7 +65,7 @@ export const TestsPageContainer: FC = () => {
         List of tests {!!testSubject && `by subject "${testSubject.name}"`}
       </h3>
 
-      {isNotStudent && (
+      {hasMethodistPermissions && (
         <Button className='self-end' onClick={handleCreateTest}>
           Create new test
         </Button>

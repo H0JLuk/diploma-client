@@ -6,8 +6,9 @@ export type Test = {
   startTime: string;
   endTime: string;
   duration?: number;
-  isRandomAnswers?: boolean;
+  isRandomAnswers: boolean;
+  hidden: boolean;
   subject?: Subject;
   subjectId: number;
-  questions: Question;
+  questions?: Question;
 };

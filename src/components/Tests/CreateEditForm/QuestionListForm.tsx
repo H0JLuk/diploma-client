@@ -1,5 +1,6 @@
-import { FC } from 'react';
-import { useFieldArray, UseFormReturn } from 'react-hook-form';
+import { FC, memo } from 'react';
+import { Controller, useFieldArray, UseFormReturn } from 'react-hook-form';
+import Select from 'react-select';
 
 import { Button, Input } from '@/components/shared';
 
@@ -16,6 +17,11 @@ const defaultQuestion: TestFormValues['questions'][number] = {
   answers: [{ text: '', isRight: true }],
 };
 
+const questionTypeOptions = [
+  { value: 'input', label: 'text answer' },
+  { value: 'single', label: 'choice of answer' },
+];
+
 export const QuestionListForm: FC<QuestionListFormProps> = ({ formMethods }) => {
   const {
     fields: questionFields,
@@ -25,6 +31,8 @@ export const QuestionListForm: FC<QuestionListFormProps> = ({ formMethods }) => 
     control: formMethods.control,
     name: 'questions',
   });
+
+  const isRemoveBtnDisabled = formMethods.watch('questions').length < 2;
 
   return (
     <div className='mb-2'>
@@ -40,12 +48,36 @@ export const QuestionListForm: FC<QuestionListFormProps> = ({ formMethods }) => 
                 labelText={`${index + 1} question`}
               />
 
-              <Button className='self-start ml-2 mt-9' onClick={() => removeQuestion(index)}>
+              <Button
+                className='self-start ml-2 mt-9'
+                disabled={isRemoveBtnDisabled}
+                onClick={() => removeQuestion(index)}
+              >
                 X
               </Button>
             </div>
 
-            <AnswerListForm formMethods={formMethods} nestIndex={index} />
+            <label className='mb-4 block' htmlFor={`question-${index}-type-select`}>
+              <p className='mb-2'>Select question type</p>
+              <Controller
+                name={`questions.${index}.type`}
+                control={formMethods.control}
+                render={({ field }) => (
+                  <Select
+                    isSearchable={false}
+                    defaultValue={questionTypeOptions.find(({ value }) => field.value === value)}
+                    value={questionTypeOptions.find(option => option.value === field.value)}
+                    onChange={option => field.onChange(option!.value)}
+                    inputId={`question-${index}-type-select`}
+                    name='type'
+                    ref={field.ref}
+                    options={questionTypeOptions}
+                  />
+                )}
+                rules={{ required: true }}
+              />
+            </label>
+            <AnswerListForm formMethods={formMethods} questionIndex={index} />
           </li>
         ))}
       </ul>
