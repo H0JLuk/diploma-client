@@ -59,7 +59,7 @@ export const UserItem: FC<UserItemProps> = ({ user, isFetching, onBanUser, onCha
 
           {user.role === 'Student' && (
             <Button
-              onClick={() => router.push(`${Routes.USERS}/${user.id}/stats`)}
+              onClick={() => router.push(`${Routes.ATTEMPTS}/users/${user.id}`)}
               className='mt-4 self-start inline-block'
             >
               Open test statistics

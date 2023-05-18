@@ -5,14 +5,19 @@ import { AuthLayout, RootLayout } from '@/components/Layouts';
 import { SettingsPageContainer } from '@/containers/Settings';
 
 const SettingsPage = () => (
-  <AuthLayout pagePermission='student-methodist-admin'>
-    <RootLayout>
-      <Head>
-        <title>Profile settings</title>
-      </Head>
-      <SettingsPageContainer />
-    </RootLayout>
-  </AuthLayout>
+  <>
+    <Head>
+      <title>Account settings</title>
+    </Head>
+    <AuthLayout pagePermission='student-methodist-admin'>
+      <RootLayout>
+        <Head>
+          <title>Profile settings</title>
+        </Head>
+        <SettingsPageContainer />
+      </RootLayout>
+    </AuthLayout>
+  </>
 );
 
 export default SettingsPage;

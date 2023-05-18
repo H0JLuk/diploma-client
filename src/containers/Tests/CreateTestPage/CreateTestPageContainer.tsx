@@ -15,6 +15,7 @@ const defaultFormValues: TestFormValues = {
   endTime,
   hidden: false,
   isRandomAnswers: false,
+  duration: 500000,
   questions: [
     {
       text: '',

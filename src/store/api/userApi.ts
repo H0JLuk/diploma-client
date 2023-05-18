@@ -3,7 +3,7 @@ import { ChangeUserRoleDto, CreateUserDto, User } from '@/types';
 import { commonApi, providesList } from '../config/commonApi';
 import { transformErrorResponse } from './baseQuery';
 
-const userApiTag = 'user';
+const userTag = 'user';
 
 export const testApi = commonApi.injectEndpoints({
   endpoints: builder => ({
@@ -12,14 +12,21 @@ export const testApi = commonApi.injectEndpoints({
         url: 'users',
         credentials: 'include',
       }),
-      providesTags: result => providesList(result, userApiTag),
+      providesTags: result => providesList(result, userTag),
+    }),
+    getUser: builder.query<User, User['id']>({
+      query: userId => ({
+        url: `users/${userId}`,
+        credentials: 'include',
+      }),
+      providesTags: result => providesList(result, userTag),
     }),
     getStudents: builder.query<User[], void>({
       query: () => ({
         url: 'users/students',
         credentials: 'include',
       }),
-      providesTags: result => providesList(result, userApiTag),
+      providesTags: result => providesList(result, userTag),
     }),
     createUser: builder.mutation<void, CreateUserDto>({
       query: body => ({
@@ -29,7 +36,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err) => (err ? [] : [userApiTag]),
+      invalidatesTags: (_, err) => (err ? [] : [userTag]),
     }),
     changeUserRole: builder.mutation<void, ChangeUserRoleDto>({
       query: ({ id, role }) => ({
@@ -39,7 +46,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userApiTag, id: arg.id }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userTag, id: arg.id }]),
     }),
     banUser: builder.mutation<void, number>({
       query: userId => ({
@@ -48,7 +55,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userApiTag, id: arg }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userTag, id: arg }]),
     }),
     changeStudentRole: builder.mutation<void, ChangeUserRoleDto>({
       query: ({ id, role }) => ({
@@ -58,7 +65,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userApiTag, id: arg.id }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userTag, id: arg.id }]),
     }),
     banStudent: builder.mutation<void, number>({
       query: studentId => ({
@@ -67,13 +74,14 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userApiTag, id: arg }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: userTag, id: arg }]),
     }),
   }),
 });
 
 export const {
   useGetUsersQuery,
+  useGetUserQuery,
   useGetStudentsQuery,
   useChangeUserRoleMutation,
   useCreateUserMutation,

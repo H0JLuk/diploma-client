@@ -57,7 +57,8 @@
         "caughtErrorsIgnorePattern": "^_"
       }
     ],
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "react/no-unescaped-entities": "off"
   },
   "settings": {
     "import/resolver": {

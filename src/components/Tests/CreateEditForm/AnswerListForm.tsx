@@ -60,7 +60,7 @@ export const AnswerListForm: FC<AnswerListFormProps> = ({ questionIndex, formMet
               error={formMethods.formState.errors.questions?.[questionIndex]?.answers?.[index]?.text?.message}
               {...formMethods.register(`questions.${questionIndex}.answers.${index}.text`)}
             />
-            <Button disabled={isRemoveBtnDisabled} className='h-10 mt-8' onClick={() => removeAnswer(index)}>
+            <Button disabled={isRemoveBtnDisabled} className='h-10 mt-2' onClick={() => removeAnswer(index)}>
               X
             </Button>
           </div>

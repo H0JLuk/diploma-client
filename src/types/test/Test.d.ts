@@ -1,4 +1,4 @@
-import { Subject } from '..';
+import { Question, Subject } from '..';
 
 export type Test = {
   id: number;
@@ -7,8 +7,11 @@ export type Test = {
   endTime: string;
   duration?: number;
   isRandomAnswers: boolean;
+  scoreFor3: number;
+  scoreFor4: number;
+  scoreFor5: number;
   hidden: boolean;
   subject?: Subject;
   subjectId: number;
-  questions?: Question;
+  questions?: Question[];
 };

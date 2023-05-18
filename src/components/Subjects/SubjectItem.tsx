@@ -55,7 +55,7 @@ export const SubjectItem: FC<SubjectItemProps> = ({
           <div className='mt-3 font-semibold text-lg'>{subject.name}</div>
           {!!subject.testsLength && (
             <div className='text-sm font-light'>
-              {subject.testsLength} test{subject.testsLength > 1 && 's'}
+              {subject.testsLength} available test{subject.testsLength > 1 && 's'}
             </div>
           )}
 

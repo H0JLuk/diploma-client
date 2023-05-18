@@ -8,15 +8,16 @@ import { subjectApi } from '@/store/api/subjectApi';
 import { commonApi } from '@/store/config/commonApi';
 
 const Home: NextPage = () => (
-  <RootLayout>
-    <AuthLayout pagePermission='common'>
-      <Head>
-        <title>Предметы для тестирования и оценки знаний</title>
-      </Head>
-
-      <HomePageContainer />
-    </AuthLayout>
-  </RootLayout>
+  <>
+    <Head>
+      <title>Subject for testing</title>
+    </Head>
+    <RootLayout>
+      <AuthLayout pagePermission='common'>
+        <HomePageContainer />
+      </AuthLayout>
+    </RootLayout>
+  </>
 );
 
 export default Home;

@@ -40,7 +40,7 @@ export const StudentItem: FC<StudentItemProps> = ({ student, isFetching, onBanSt
           <div className='mt-3 font-semibold text-lg'>Name: {student.name}</div>
 
           <Button
-            onClick={() => router.push(`${Routes.USERS}/${student.id}/stats`)}
+            onClick={() => router.push(`${Routes.ATTEMPTS}/users/${student.id}`)}
             className='mt-4 self-start inline-block'
           >
             Open test statistics

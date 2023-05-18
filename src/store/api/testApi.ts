@@ -3,7 +3,7 @@ import { CreateTestDto, Test, UpdateTestDto } from '@/types';
 import { commonApi, providesList } from '../config/commonApi';
 import { transformErrorResponse } from './baseQuery';
 
-const testApiTag = 'test';
+const testTag = 'test';
 
 export const testApi = commonApi.injectEndpoints({
   endpoints: builder => ({
@@ -12,14 +12,14 @@ export const testApi = commonApi.injectEndpoints({
         url: subjectId ? `tests/subject/${subjectId}` : 'tests',
         credentials: 'include',
       }),
-      providesTags: result => providesList(result, testApiTag),
+      providesTags: result => providesList(result, testTag),
     }),
     getTest: builder.query<Test, number>({
       query: testId => ({
         url: `tests/${testId}`,
         credentials: 'include',
       }),
-      providesTags: result => providesList(result, testApiTag),
+      providesTags: result => providesList(result, testTag),
     }),
     createTest: builder.mutation<Test, CreateTestDto>({
       query: body => ({
@@ -29,7 +29,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err) => (err ? [] : [testApiTag]),
+      invalidatesTags: (_, err) => (err ? [] : [testTag]),
     }),
     updateTest: builder.mutation<Test, UpdateTestDto>({
       query: ({ id, ...dto }) => ({
@@ -39,7 +39,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testApiTag, id: arg.id }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testTag, id: arg.id }]),
     }),
     deleteTest: builder.mutation<void, number>({
       query: testId => ({
@@ -48,7 +48,7 @@ export const testApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testApiTag, id: arg }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testTag, id: arg }]),
     }),
   }),
 });

@@ -3,7 +3,7 @@ import { Answer, CreateAnswerDto, UpdateAnswerDto } from '@/types';
 import { commonApi } from '../config/commonApi';
 import { transformErrorResponse } from './baseQuery';
 
-const answerApiTag = 'answer';
+const answerTag = 'answer';
 
 export const answerApi = commonApi.injectEndpoints({
   endpoints: builder => ({
@@ -15,7 +15,7 @@ export const answerApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err) => (err ? [] : [answerApiTag]),
+      invalidatesTags: (_, err) => (err ? [] : [answerTag]),
     }),
     updateAnswer: builder.mutation<Answer, UpdateAnswerDto>({
       query: ({ id, ...dto }) => ({
@@ -25,7 +25,7 @@ export const answerApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: answerApiTag, id: arg.id }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: answerTag, id: arg.id }]),
     }),
     deleteAnswer: builder.mutation<void, number>({
       query: id => ({
@@ -34,7 +34,7 @@ export const answerApi = commonApi.injectEndpoints({
         credentials: 'include',
       }),
       transformErrorResponse,
-      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: answerApiTag, id: arg }]),
+      invalidatesTags: (_, err, arg) => (err ? [] : [{ type: answerTag, id: arg }]),
     }),
   }),
 });

@@ -2,10 +2,11 @@ import { useRouter } from 'next/navigation';
 import { FC } from 'react';
 
 import { useCheckAuthQuery } from '@/store/api/authApi';
+import { useStartTestAttemptMutation } from '@/store/api/testAttemptApi';
 import { Test } from '@/types';
 
-import { Routes } from '../Navbar/navRoutes';
-import { Button } from '../shared';
+import { Routes } from '../../Navbar/navRoutes';
+import { Button } from '../../shared';
 
 type TestItemProps = {
   test: Test;
@@ -31,11 +32,13 @@ export const TestItem: FC<TestItemProps> = ({
   const { isSuccess: isAuthorized } = useCheckAuthQuery();
   const router = useRouter();
 
-  const handleTestPassing = () => {
-    if (isAuthorized) {
-      return router.push(`${Routes.TESTS}/?subjectId=${test.id}`);
-    }
-    router.push(Routes.LOG_IN);
+  const [startTestAttemptMutation, { isLoading: isStartTestAttemptLoading }] = useStartTestAttemptMutation();
+
+  const handleTestPassingClick = async () => {
+    const {
+      testHistory: { id: testAttemptId },
+    } = await startTestAttemptMutation(test.id).unwrap();
+    router.push(`${Routes.ATTEMPTS}/${testAttemptId}`);
   };
 
   return (
@@ -61,11 +64,18 @@ export const TestItem: FC<TestItemProps> = ({
             </>
           )}
           <div className='mt-3 font-semibold text-lg'>{test.name}</div>
-          {/* <div className='text-sm font-light w-60 md:w-auto'>Unlimited calls</div> */}
 
-          <Button onClick={handleTestPassing} className='mt-4 self-start inline-block'>
-            Start passing the test
-          </Button>
+          {isAuthorized ? (
+            <Button
+              isLoading={isStartTestAttemptLoading}
+              onClick={handleTestPassingClick}
+              className='mt-4 self-start inline-block'
+            >
+              Start passing the test
+            </Button>
+          ) : (
+            <p>For test passing you need log in</p>
+          )}
         </div>
       </div>
     </div>

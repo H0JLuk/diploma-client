@@ -1,3 +1,6 @@
+import { Answer } from '../answer';
+import { AttemptAnswer } from '../attempt-answer';
+
 export type Question = {
   id: number;
   text: string;
@@ -6,6 +9,7 @@ export type Question = {
   category?: QuestionCategory;
   categoryId: number;
   answers?: Answer[];
+  testHistoryAnswer?: AttemptAnswer[];
 };
 
 export enum QuestionTypeEnum {

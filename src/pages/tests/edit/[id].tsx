@@ -1,4 +1,5 @@
 import { GetServerSideProps, NextPage } from 'next';
+import Head from 'next/head';
 import React from 'react';
 
 import { AuthLayout, RootLayout } from '@/components/Layouts';
@@ -7,11 +8,16 @@ import { EditTestPageContainer } from '@/containers/Tests';
 type EditTestProps = { testId: number };
 
 const EditTest: NextPage<EditTestProps> = ({ testId }) => (
-  <RootLayout>
-    <AuthLayout pagePermission='methodist-admin'>
-      <EditTestPageContainer testId={testId} />
-    </AuthLayout>
-  </RootLayout>
+  <>
+    <Head>
+      <title>Edit test</title>
+    </Head>
+    <RootLayout>
+      <AuthLayout pagePermission='methodist-admin'>
+        <EditTestPageContainer testId={testId} />
+      </AuthLayout>
+    </RootLayout>
+  </>
 );
 
 export default EditTest;

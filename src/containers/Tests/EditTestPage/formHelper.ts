@@ -13,7 +13,7 @@ export const fromTestToTestFormFields = (test?: Test): TestFormValues | undefine
     hidden,
     isRandomAnswers,
     subjectId,
-    duration,
+    duration: duration || 100_000_000,
     questions,
     startTime: new Date(startTime),
     endTime: new Date(endTime),

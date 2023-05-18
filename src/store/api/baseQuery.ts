@@ -74,5 +74,8 @@ export const transformErrorResponse = (err: FetchBaseQueryError): string => {
     return err.data.message as string;
   }
 
-  return typeof err.data === 'string' ? err.data : 'Server error...';
+  if (typeof err.data === 'string') return err.data;
+  if ('message' in err && typeof err.message === 'string') return err.message;
+
+  return 'Server error...';
 };

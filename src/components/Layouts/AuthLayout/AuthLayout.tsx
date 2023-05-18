@@ -1,11 +1,11 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, PropsWithChildren, useMemo } from 'react';
 
+import { Loader } from '@/components/shared';
 import { useCheckAuthQuery } from '@/store/api/authApi';
 import { User } from '@/types';
 
 import { Routes } from '../../Navbar/navRoutes';
-import { Loader } from './Loader';
 
 type PagePermissions = 'student-methodist-admin' | 'methodist-admin' | 'admin' | 'unauthorized' | 'common';
 type AuthLayoutProps = PropsWithChildren<{

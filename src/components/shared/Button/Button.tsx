@@ -1,4 +1,5 @@
 import { ComponentProps, FC, PropsWithChildren } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { LoaderSvg } from './ButtonLoader';
 
@@ -29,7 +30,7 @@ export const Button: FC<ButtonProps> = ({
 }) => (
   <button
     {...rest}
-    className={`${commonStyles} ${classNamesByVariant[variant]} ${className}`}
+    className={twMerge(`${commonStyles} ${classNamesByVariant[variant]} ${className}`)}
     type={type === 'button' ? 'button' : 'submit'}
     disabled={disabled || isLoading}
   >

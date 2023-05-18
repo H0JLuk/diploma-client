@@ -28,6 +28,19 @@ export const TestsPageContainer: FC = () => {
   const [deleteTestMutation, { isLoading: isDeleteTestLoading }] = useDeleteTestMutation();
   const { currentData: userInfo, isSuccess: isAuthorized } = useCheckAuthQuery();
 
+  const filteredTestList = useMemo(
+    () =>
+      testData?.filter(test => {
+        if (!isAuthorized || userInfo!.role === 'Student') {
+          const isStartDateStarted = new Date(test.startTime) < new Date();
+          const isEndDateNotFinished = new Date(test.endTime) > new Date();
+          return isStartDateStarted && isEndDateNotFinished && !test.hidden;
+        }
+        return true;
+      }),
+    [testData, userInfo, isAuthorized],
+  );
+
   const hasMethodistPermissions = isAuthorized && !!userInfo && userInfo?.role !== 'Student';
 
   const isFetching = isDeleteTestLoading || isGetTestFetching;
@@ -44,7 +57,7 @@ export const TestsPageContainer: FC = () => {
   const testList = useMemo(
     () => (
       <TestList
-        tests={testData}
+        tests={filteredTestList}
         isFetching={isFetching}
         isError={isGetTestsError}
         hasMethodistPermissions={hasMethodistPermissions}
@@ -52,7 +65,7 @@ export const TestsPageContainer: FC = () => {
         onDeleteTest={deleteTestMutation}
       />
     ),
-    [deleteTestMutation, isFetching, isGetTestsError, hasMethodistPermissions, testData, handleEditTestClick],
+    [deleteTestMutation, isFetching, isGetTestsError, hasMethodistPermissions, filteredTestList, handleEditTestClick],
   );
 
   if (!testSubject && subjectIdFromParams) {

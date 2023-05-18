@@ -92,7 +92,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
         type='datetime-local'
         error={formMethods.formState.errors.endTime?.message}
       />
-      <Input
+      {/* <Input
         {...formMethods.register('duration')}
         labelText='Duration (in minutes)'
         customClass='w-full'
@@ -100,7 +100,38 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
         id='duration'
         type='number'
         error={formMethods.formState.errors.duration?.message}
+      /> */}
+
+      <Input
+        {...formMethods.register('scoreFor3')}
+        labelText='Points for "3"'
+        customClass='w-full'
+        placeholder='Type count of completed questions for 3 mark'
+        id='min-3-score'
+        type='number'
+        error={formMethods.formState.errors.scoreFor3?.message}
       />
+
+      <Input
+        {...formMethods.register('scoreFor4')}
+        labelText='Points for "4"'
+        customClass='w-full'
+        placeholder='Type count of completed questions for 4 mark...'
+        id='min-4-score'
+        type='number'
+        error={formMethods.formState.errors.scoreFor4?.message}
+      />
+
+      <Input
+        {...formMethods.register('scoreFor5')}
+        labelText='Points for "5"'
+        customClass='w-full'
+        placeholder='Type count of completed questions for 5 mark...'
+        id='min-5-score'
+        type='number'
+        error={formMethods.formState.errors.scoreFor5?.message}
+      />
+
       <Input
         {...formMethods.register('isRandomAnswers')}
         containerClassName='flex items-center'
