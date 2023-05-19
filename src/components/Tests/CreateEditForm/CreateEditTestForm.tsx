@@ -45,16 +45,16 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
     <form className='max-w-[450px] w-full flex flex-col pb-2' onSubmit={formMethods.handleSubmit(handleSubmit)}>
       <Input
         {...formMethods.register('name')}
-        labelText='Title'
+        labelText='Название теста'
         autoComplete='off'
         customClass='w-full'
-        placeholder='Type title...'
+        placeholder='Введите название...'
         error={formMethods.formState.errors.name?.message}
         id='name'
       />
 
       <label htmlFor='subject-select'>
-        <p className='mb-2'>Select subject </p>
+        <p className='mb-2'>Выберите предмет</p>
         <Controller
           name='subjectId'
           control={formMethods.control}
@@ -64,7 +64,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
               onChange={option => field.onChange(option!.value)}
               id='subject-select'
               name='subject'
-              placeholder='Type subject...'
+              placeholder='Введите предмет...'
               ref={field.ref}
               options={subjectOptions}
             />
@@ -76,8 +76,8 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       <Input
         {...formMethods.register('startTime')}
         value={formMethods.watch('startTime')?.toISOString?.().slice(0, 16)}
-        labelText='Testing start time'
-        customClass='w-full'
+        labelText='Время начало тестирования'
+        customClass='w-full z-0'
         id='start-time'
         type='datetime-local'
         error={formMethods.formState.errors.startTime?.message}
@@ -86,7 +86,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       <Input
         {...formMethods.register('endTime')}
         value={formMethods.watch('endTime')?.toISOString?.().slice(0, 16)}
-        labelText='Testing end time'
+        labelText='Время конца тестирования'
         customClass='w-full'
         id='end-time'
         type='datetime-local'
@@ -94,9 +94,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       />
       {/* <Input
         {...formMethods.register('duration')}
-        labelText='Duration (in minutes)'
+        labelText='Продолжительность теста (в минутах)'
         customClass='w-full'
-        placeholder='Type duration...'
+        placeholder='Введите продолжительность...'
         id='duration'
         type='number'
         error={formMethods.formState.errors.duration?.message}
@@ -104,9 +104,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <Input
         {...formMethods.register('scoreFor3')}
-        labelText='Points for "3"'
+        labelText='Количество баллов для отметки "3"'
         customClass='w-full'
-        placeholder='Type count of completed questions for 3 mark'
+        placeholder='Введите количество баллов для отметки "3"'
         id='min-3-score'
         type='number'
         error={formMethods.formState.errors.scoreFor3?.message}
@@ -114,9 +114,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <Input
         {...formMethods.register('scoreFor4')}
-        labelText='Points for "4"'
+        labelText='Количество баллов для отметки "4"'
         customClass='w-full'
-        placeholder='Type count of completed questions for 4 mark...'
+        placeholder='Введите количество баллов для отметки "4"'
         id='min-4-score'
         type='number'
         error={formMethods.formState.errors.scoreFor4?.message}
@@ -124,9 +124,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <Input
         {...formMethods.register('scoreFor5')}
-        labelText='Points for "5"'
+        labelText='Количество баллов для отметки "5"'
         customClass='w-full'
-        placeholder='Type count of completed questions for 5 mark...'
+        placeholder='Введите количество баллов для отметки "5"'
         id='min-5-score'
         type='number'
         error={formMethods.formState.errors.scoreFor5?.message}
@@ -135,7 +135,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       <Input
         {...formMethods.register('isRandomAnswers')}
         containerClassName='flex items-center'
-        labelText='Should questions and answers be sorted in random order?'
+        labelText='Должны ли вопросы и ответы быть в случайном порядке?'
         customClass='w-[24px] h-[24px] min-w-[24px] ml-[auto]'
         type='checkbox'
         error={formMethods.formState.errors.isRandomAnswers?.message}
@@ -143,7 +143,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       <Input
         {...formMethods.register('hidden')}
         containerClassName='flex items-center'
-        labelText='Should test be hidden?'
+        labelText='Должен ли быть тест скрыт?'
         customClass='w-[24px] h-[24px] min-w-[24px] ml-[auto]'
         type='checkbox'
         error={formMethods.formState.errors.hidden?.message}
@@ -154,7 +154,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
       <QuestionListForm formMethods={formMethods} />
 
       <Button type='submit' isLoading={isLoading} className='justify-center text-[20px] font-semibold'>
-        {mode === 'create' ? 'Create test' : 'Edit test'}
+        {mode === 'create' ? 'Создать тест' : 'Изменить тест'}
       </Button>
     </form>
   );

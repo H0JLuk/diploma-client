@@ -77,5 +77,5 @@ export const transformErrorResponse = (err: FetchBaseQueryError): string => {
   if (typeof err.data === 'string') return err.data;
   if ('message' in err && typeof err.message === 'string') return err.message;
 
-  return 'Server error...';
+  return 'Ооой, что-то пошло не так... Перезагрузите страницу';
 };

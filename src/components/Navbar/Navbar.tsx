@@ -60,7 +60,7 @@ export const Navbar: FC = () => {
                   disabled={isSignOutLoading}
                   className='px-3 py-2 ml-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75'
                 >
-                  &#8676;&nbsp;&nbsp;Sign out
+                  &#8676;&nbsp;&nbsp;Выйти
                 </Button>
               </li>
             )}

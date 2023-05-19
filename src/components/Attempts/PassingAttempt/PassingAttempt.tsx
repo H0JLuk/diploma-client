@@ -26,13 +26,13 @@ export const PassingAttempt: FC<PassingAttemptProps> = ({ test, attempt, isLoadi
 
   return (
     <div className='flex flex-col max-w-[450px] mx-auto'>
-      <h1 className='text-3xl mt-2 mb-5 text-center'>Subject: {test.subject?.name}</h1>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>Test "{test.name}" attempt</h3>
-      <p className='mb-5'>Started at: {formatDateString(attempt.startedAt)}</p>
+      <h1 className='text-3xl mt-2 mb-5 text-center'>Предмет: {test.subject?.name}</h1>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Попытка прохождения теста "{test.name}"</h3>
+      <p className='mb-5'>Время начала тестирования: {formatDateString(attempt.startedAt)}</p>
 
       <form onSubmit={formMethods.handleSubmit(onSubmit)}>
         {test.questions?.map((question, index) => (
-          <div className='' key={question.id}>
+          <div key={question.id}>
             <p className='font-medium text-[18px]'>
               {index + 1}. {question.text}
             </p>

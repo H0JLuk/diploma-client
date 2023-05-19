@@ -6,7 +6,7 @@ import { UsersPageContainer } from '@/containers/Users';
 const UsersPage = () => (
   <>
     <Head>
-      <title>List of users</title>
+      <title>Список пользователей</title>
       <meta name='description' content='Tests by subject page for system of testing knowledge' />
     </Head>
     <RootLayout>

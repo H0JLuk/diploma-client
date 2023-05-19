@@ -33,7 +33,7 @@ export const SettingsPageContainer: FC = () => {
 
   return (
     <div className='flex justify-center items-center flex-col'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>User settings</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Настройки ползователя</h3>
 
       <form className='m-8 max-w-[300px] w-full' onSubmit={handleSubmit(handleSubmitQuery)}>
         {Object.entries(settingsFields).map(([name, field]) => (

@@ -13,7 +13,7 @@ export const AttemptsPageContainer: FC = () => {
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>List of attempts</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Список попыток</h3>
 
       <AttemptList
         isFetching={isGetAttemptsFetching}

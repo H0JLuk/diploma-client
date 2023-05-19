@@ -10,7 +10,7 @@ type EditTestProps = { testId: number };
 const EditTest: NextPage<EditTestProps> = ({ testId }) => (
   <>
     <Head>
-      <title>Edit test</title>
+      <title>Редактировать тест</title>
     </Head>
     <RootLayout>
       <AuthLayout pagePermission='methodist-admin'>

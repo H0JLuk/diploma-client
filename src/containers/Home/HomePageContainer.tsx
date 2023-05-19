@@ -109,11 +109,11 @@ export const HomePageContainer: FC = () => {
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>List of subjects</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Список предметов</h3>
 
       {hasMethodistPermissions && (
         <Button className='self-end' onClick={openCreatingSubject}>
-          Create new subject
+          Создать новый предмет
         </Button>
       )}
 
@@ -121,8 +121,8 @@ export const HomePageContainer: FC = () => {
 
       <Modal
         titleText={modalTitleText}
-        acceptBtnText='Save'
-        declineBtnText='Close'
+        acceptBtnText='Сохранить'
+        declineBtnText='Закрыть'
         onClose={closeModal}
         isOpened={modalState.isOpened}
         formId={formId}

@@ -44,7 +44,7 @@ export const CreateTestPageContainer: FC = () => {
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>Creating a new test</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Создание нового теста</h3>
 
       <CreateEditTestForm
         defaultFormValues={defaultFormValues}

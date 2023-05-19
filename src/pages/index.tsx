@@ -10,7 +10,7 @@ import { commonApi } from '@/store/config/commonApi';
 const Home: NextPage = () => (
   <>
     <Head>
-      <title>Subject for testing</title>
+      <title>Предметы для тестирования</title>
     </Head>
     <RootLayout>
       <AuthLayout pagePermission='common'>

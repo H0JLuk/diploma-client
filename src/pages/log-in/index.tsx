@@ -7,7 +7,7 @@ import { LogInPageContainer } from '@/containers/LogIn';
 const LogInPage: FC = () => (
   <>
     <Head>
-      <title>Log In</title>
+      <title>Авторизация</title>
       <meta name='description' content='Authorization page for system of testing knowledge' />
     </Head>
     <RootLayout>

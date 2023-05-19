@@ -13,31 +13,31 @@ export const initSignUpFormData: SignUpFormData = {
 
 export const signUpFields = {
   name: {
-    labelText: 'Name',
+    labelText: 'Имя',
     id: 'name',
     autoComplete: 'on',
-    placeholder: 'Name',
+    placeholder: 'Имя',
     autoFocus: true,
   },
   login: {
-    labelText: 'Email address',
+    labelText: 'Email адрес',
     id: 'login',
     type: 'email',
     autoComplete: 'on',
-    placeholder: 'Email address',
+    placeholder: 'Email адрес',
   },
   password: {
-    labelText: 'Password',
+    labelText: 'Пароль',
     id: 'password',
     type: 'password',
     autoComplete: 'on',
-    placeholder: 'Password',
+    placeholder: 'Пароль',
   },
   confirmPassword: {
-    labelText: 'Confirm Password',
+    labelText: 'Повторите пароль',
     id: 'confirmPassword',
     type: 'password',
     autoComplete: 'on',
-    placeholder: 'Repeat password',
+    placeholder: 'Повторите пароль',
   },
 } as const satisfies Record<SignUpFieldsNames, InputProps>;

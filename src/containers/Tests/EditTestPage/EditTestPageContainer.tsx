@@ -15,7 +15,7 @@ export const EditTestPageContainer: FC<EditTestPageContainerProps> = ({ testId }
   const handleSave = async (data: CreateTestDto | UpdateTestDto) => {
     if (isEditTestDto(data)) {
       await updateTestMutation(data).unwrap();
-      alert(`Test "${data.name}" is updated!`);
+      alert(`Тест "${data.name}" был обновлен!`);
     }
   };
 
@@ -26,9 +26,9 @@ export const EditTestPageContainer: FC<EditTestPageContainerProps> = ({ testId }
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>Editing a test</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Редактирование теста</h3>
 
-      {isTestLoading && <div>Loading...</div>}
+      {isTestLoading && <p>Загрузка...</p>}
 
       {defaultFields && (
         <CreateEditTestForm

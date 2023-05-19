@@ -97,7 +97,7 @@ export const testAttemptsApi = commonApi.injectEndpoints({
       invalidatesTags: (_, err, arg) => (err ? [] : [{ type: testAttemptTag, id: arg.attemptId }]),
     }),
 
-    getUserTestsStats: builder.query<any, number>({
+    getUserTestsStats: builder.query<{ 2: number; 3: number; 4: number; 5: number }, number>({
       query: userId => ({
         url: `test-history/stats/users/${userId}`,
         credentials: 'include',
@@ -112,6 +112,7 @@ export const {
   useGetTestAttemptQuery,
   useGetTestAttemptsQuery,
   useGetTestAttemptsByStudentIdQuery,
+  useGetUserTestsStatsQuery,
   useStartTestAttemptMutation,
   useGetTestAttemptResultQuery,
   useFinishTestAttemptMutation,

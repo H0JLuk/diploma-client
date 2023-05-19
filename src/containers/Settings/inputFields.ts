@@ -6,21 +6,21 @@ export type SettingsFormData = Record<SettingsFieldsNames, string>;
 
 export const settingsFields = {
   name: {
-    labelText: 'Name',
+    labelText: 'Имя',
     id: 'name',
-    placeholder: 'Name',
+    placeholder: 'Имя',
     autoFocus: true,
   },
   oldPassword: {
-    labelText: 'Old password',
+    labelText: 'Старый пароль',
     id: 'oldPassword',
     type: 'password',
-    placeholder: 'Old password',
+    placeholder: 'Старый пароль',
   },
   newPassword: {
-    labelText: 'New password',
+    labelText: 'Новый пароль',
     id: 'newPassword',
     type: 'password',
-    placeholder: 'New password',
+    placeholder: 'Новый пароль',
   },
 } as const satisfies Record<SettingsFieldsNames, InputProps>;

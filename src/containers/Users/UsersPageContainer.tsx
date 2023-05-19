@@ -68,18 +68,18 @@ export const UsersPageContainer: FC = () => {
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>List of users</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Список пользователей</h3>
 
       <Button className='self-end' onClick={handleOpenCreatingUserModal}>
-        Create new user
+        Создать нового пользователя
       </Button>
 
       {usersList}
 
       <Modal
-        titleText='Create new user'
-        acceptBtnText='Create user'
-        declineBtnText='Close'
+        titleText='Создание нового пользователя'
+        acceptBtnText='Создать пользователя'
+        declineBtnText='Закрыть'
         isOpened={modalState.isOpened}
         formId={createUserFormId}
         onClose={handleCloseCreatingUserModal}
@@ -98,7 +98,7 @@ export const UsersPageContainer: FC = () => {
 
           <fieldset>
             <label className='mb-0.5' htmlFor='role-select'>
-              Role
+              Роль
             </label>
             <Controller
               name='role'
@@ -110,7 +110,7 @@ export const UsersPageContainer: FC = () => {
                   options={selectOptions}
                   onChange={option => field.onChange(option!.value)}
                   ref={field.ref}
-                  placeholder='Select user role'
+                  placeholder='Выберите роль пользователя'
                 />
               )}
               rules={{ required: true }}

@@ -2,9 +2,9 @@ import { Question } from '../question';
 
 export type Answer = {
   id: number;
-  text?: string;
+  text: string;
   image?: string;
-  isRight?: boolean;
+  isRight: boolean;
   questionId: number;
   question?: Question;
 };

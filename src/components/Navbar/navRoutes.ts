@@ -16,14 +16,14 @@ export enum Routes {
   TESTS = '/tests',
 }
 
-const logInRoute = { name: 'Log in', href: Routes.LOG_IN };
-const signUpRoute = { name: 'Sign up', href: Routes.SIGN_UP };
-const settingsRoute = { name: 'Settings', href: Routes.SETTINGS };
-const subjectsRoute = { name: 'Subjects', href: Routes.HOME };
-const testsRoute = { name: 'Tests', href: Routes.TESTS };
-const attemptsRoute = { name: 'Attempts', href: Routes.ATTEMPTS };
-const studentsRoute = { name: 'Students', href: Routes.STUDENTS };
-const usersRoute = { name: 'Users', href: Routes.USERS };
+const logInRoute = { name: 'Войти', href: Routes.LOG_IN };
+const signUpRoute = { name: 'Зарегистрироваться', href: Routes.SIGN_UP };
+const settingsRoute = { name: 'Настройки', href: Routes.SETTINGS };
+const subjectsRoute = { name: 'Предметы', href: Routes.HOME };
+const testsRoute = { name: 'Тесты', href: Routes.TESTS };
+const attemptsRoute = { name: 'Попытки прохождения', href: Routes.ATTEMPTS };
+const studentsRoute = { name: 'Студенты', href: Routes.STUDENTS };
+const usersRoute = { name: 'Пользователи', href: Routes.USERS };
 
 const unAuthRoutes: Readonly<Route[]> = [subjectsRoute, testsRoute, logInRoute, signUpRoute];
 

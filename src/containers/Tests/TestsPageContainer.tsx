@@ -69,18 +69,18 @@ export const TestsPageContainer: FC = () => {
   );
 
   if (!testSubject && subjectIdFromParams) {
-    return <div>Incorrect subject :(</div>;
+    return <div>Неверный предмет :(</div>;
   }
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
       <h3 className='text-2xl mt-2 mb-5 text-center'>
-        List of tests {!!testSubject && `by subject "${testSubject.name}"`}
+        Список тестов {!!testSubject && `по предмету "${testSubject.name}"`}
       </h3>
 
       {hasMethodistPermissions && (
         <Button className='self-end' onClick={handleCreateTest}>
-          Create new test
+          Создать новый тест
         </Button>
       )}
 

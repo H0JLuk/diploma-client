@@ -17,13 +17,12 @@ export const AttemptResultComponent: FC<AttemptResultProps> = ({ attemptResult, 
 
   return (
     <div className='flex flex-col max-w-[450px] mx-auto'>
-      <h1 className='text-3xl mt-2 mb-5 text-center'>Test: {attemptResult.test.name}</h1>
-      {/* <h3 className='text-2xl mt-2 mb-5 text-center'>Test "{attemptResult.test.name}" attempt</h3> */}
-      <p className='mb-5'>Started at: {formatDateString(attemptResult.testHistory.startedAt)}</p>
-      <p className='mb-5'>Finished at: {formatDateString(attemptResult.testHistory.finishedAt!)}</p>
+      <h1 className='text-3xl mt-2 mb-5 text-center'>Тест: {attemptResult.test.name}</h1>
+      <p className='mb-5'>Время начала: {formatDateString(attemptResult.testHistory.startedAt)}</p>
+      <p className='mb-5'>Время завершения: {formatDateString(attemptResult.testHistory.finishedAt!)}</p>
 
-      <p className='mb-5'>
-        Mark: {attemptResult.mark} ({attemptResult.totalRightPoints}/{attemptResult.test.questions?.length} points)
+      <p className='mb-5 font-bold'>
+        Оценка: {attemptResult.mark} ({attemptResult.totalRightPoints}/{attemptResult.test.questions?.length} баллов)
       </p>
 
       {attemptResult.test.questions?.map((question, index) => (
@@ -55,7 +54,7 @@ export const AttemptResultComponent: FC<AttemptResultProps> = ({ attemptResult, 
           {question.type === 'input' && (
             <>
               <Input
-                labelText='Answer'
+                labelText='Ответ'
                 value={question.answers![0].text}
                 customClass={
                   question.answers![0].text === question.testHistoryAnswer![0].textAnswer ? 'text-[green]' : ''
@@ -64,7 +63,7 @@ export const AttemptResultComponent: FC<AttemptResultProps> = ({ attemptResult, 
               />
               {question.answers![0].text !== question.testHistoryAnswer![0].textAnswer && (
                 <Input
-                  labelText='Your answer'
+                  labelText='Ваш ответ'
                   value={question.testHistoryAnswer![0].textAnswer}
                   customClass='text-[red] font-[bold]'
                   disabled

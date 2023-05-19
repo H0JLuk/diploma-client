@@ -12,7 +12,7 @@ const SettingsPage = () => (
     <AuthLayout pagePermission='student-methodist-admin'>
       <RootLayout>
         <Head>
-          <title>Profile settings</title>
+          <title>Настройки профиля</title>
         </Head>
         <SettingsPageContainer />
       </RootLayout>

@@ -11,8 +11,8 @@ import { commonApi } from '@/store/config/commonApi';
 const TestsPage = () => (
   <>
     <Head>
-      <title>List of tests</title>
-      <meta name='description' content='Tests by subject page for system of testing knowledge' />
+      <title>Список тестов</title>
+      <meta name='description' content='Список тестов системы тестирования и оценки знаний' />
     </Head>
     <RootLayout>
       <AuthLayout pagePermission='common'>

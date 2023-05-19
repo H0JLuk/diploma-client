@@ -28,7 +28,7 @@ export const StudentsPageContainer: FC = () => {
 
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
-      <h3 className='text-2xl mt-2 mb-5 text-center'>List of students</h3>
+      <h3 className='text-2xl mt-2 mb-5 text-center'>Список студентов</h3>
 
       {studentsList}
     </main>

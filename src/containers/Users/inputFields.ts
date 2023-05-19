@@ -7,21 +7,21 @@ export type CreatingUserFormData = Record<CreatingUserFieldsNames, string> & { r
 
 export const creatingUserFields = {
   name: {
-    labelText: 'Name',
+    labelText: 'Имя',
     id: 'name',
-    placeholder: 'Name',
+    placeholder: 'Имя',
   },
   login: {
-    labelText: 'login',
+    labelText: 'Email',
     id: 'login',
     type: 'email',
     placeholder: 'Email',
   },
   password: {
-    labelText: 'Password',
+    labelText: 'Пароль',
     id: 'password',
     type: 'password',
-    placeholder: 'Password',
+    placeholder: 'Пароль',
   },
 } as const satisfies Record<Exclude<CreatingUserFieldsNames, 'role'>, InputProps>;
 

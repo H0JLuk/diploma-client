@@ -35,10 +35,14 @@ export const TestItem: FC<TestItemProps> = ({
   const [startTestAttemptMutation, { isLoading: isStartTestAttemptLoading }] = useStartTestAttemptMutation();
 
   const handleTestPassingClick = async () => {
-    const {
-      testHistory: { id: testAttemptId },
-    } = await startTestAttemptMutation(test.id).unwrap();
-    router.push(`${Routes.ATTEMPTS}/${testAttemptId}`);
+    try {
+      const {
+        testHistory: { id: testAttemptId },
+      } = await startTestAttemptMutation(test.id).unwrap();
+      router.push(`${Routes.ATTEMPTS}/${testAttemptId}`);
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -71,10 +75,10 @@ export const TestItem: FC<TestItemProps> = ({
               onClick={handleTestPassingClick}
               className='mt-4 self-start inline-block'
             >
-              Start passing the test
+              Начать прохождение теста
             </Button>
           ) : (
-            <p>For test passing you need log in</p>
+            <p className='mt-4 text-[grey]'>Для прохождения теста вам необходимо зарегистрироваться</p>
           )}
         </div>
       </div>

@@ -7,7 +7,7 @@ import { CreateTestPageContainer } from '@/containers/Tests';
 const create = () => (
   <>
     <Head>
-      <title>Create test</title>
+      <title>Создать тест</title>
     </Head>
     <RootLayout>
       <AuthLayout pagePermission='methodist-admin'>

@@ -63,7 +63,7 @@ export const SubjectItem: FC<SubjectItemProps> = ({
             onClick={() => router.push(`${Routes.TESTS}/?subjectId=${subject.id}`)}
             className='mt-4 self-start inline-block'
           >
-            Open tests
+            Открыть тесты
           </Button>
         </div>
       </div>

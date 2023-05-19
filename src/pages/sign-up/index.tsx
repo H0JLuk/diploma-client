@@ -6,7 +6,7 @@ import { SignUpPageContainer } from '@/containers/SignUp';
 const SignUpPage = () => (
   <>
     <Head>
-      <title>Sign up</title>
+      <title>Регистрация</title>
       <meta name='description' content='Registration page for system of testing knowledge' />
     </Head>
     <RootLayout>

@@ -11,7 +11,7 @@ export const initLogInFormData: LogInFormData = {
 
 export const signUpFields = {
   login: {
-    labelText: 'Email address',
+    labelText: 'Email адрес',
     id: 'login',
     type: 'email',
     autoComplete: 'on',
@@ -19,10 +19,10 @@ export const signUpFields = {
     autoFocus: true,
   },
   password: {
-    labelText: 'Password',
+    labelText: 'Пароль',
     id: 'password',
     type: 'password',
     autoComplete: 'on',
-    placeholder: 'Password',
+    placeholder: 'Пароль',
   },
 } as const satisfies Record<LogInFieldsNames, InputProps>;

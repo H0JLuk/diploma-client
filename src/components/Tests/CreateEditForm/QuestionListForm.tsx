@@ -58,7 +58,7 @@ export const QuestionListForm: FC<QuestionListFormProps> = ({ formMethods }) => 
             </div>
 
             <label className='mb-4 block' htmlFor={`question-${index}-type-select`}>
-              <p className='mb-2'>Select question type</p>
+              <p className='mb-2'>Выберите тип вопроса</p>
               <Controller
                 name={`questions.${index}.type`}
                 control={formMethods.control}

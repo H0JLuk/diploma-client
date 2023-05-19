@@ -30,7 +30,7 @@ export const AnswerList: FC<AnswerListProps> = ({ formMethods, question }) => {
         ))}
 
       {question.type === 'input' && (
-        <Input {...formMethods.register(`${question.id}.answer`)} labelText='Enter answer...' />
+        <Input {...formMethods.register(`${question.id}.answer`)} labelText='Введите ответ...' />
       )}
 
       {answerError && <p className='text-[red]'>{answerError}</p>}

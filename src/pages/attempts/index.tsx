@@ -6,7 +6,7 @@ import { AttemptsPageContainer } from '@/containers/Attempts';
 const AttemptsPage = () => (
   <>
     <Head>
-      <title>My Attempts</title>
+      <title>Мои попытки тестов</title>
     </Head>
     <RootLayout>
       <AuthLayout pagePermission='student-methodist-admin'>
