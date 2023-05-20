@@ -1,21 +1,38 @@
+import {
+  BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  type ChartData,
+  type ChartOptions,
+  LinearScale,
+  Title,
+  Tooltip,
+} from 'chart.js';
 import React, { FC } from 'react';
-import { PieChart } from 'react-minimal-pie-chart';
+import { Bar } from 'react-chartjs-2';
 
 import { AttemptList } from '@/components/Attempts';
 import { useGetTestAttemptsByStudentIdQuery, useGetUserTestsStatsQuery } from '@/store/api/testAttemptApi';
 import { useGetUserQuery } from '@/store/api/userApi';
 import { User } from '@/types';
 
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
+
 type PageContainerProps = {
   studentId: User['id'];
 };
 
-const colorByMarks = {
-  2: 'red',
-  3: 'yellow',
-  4: 'orange',
-  5: 'green',
+const chartOptions: ChartOptions<'bar'> = {
+  responsive: true,
+  plugins: {
+    title: {
+      display: true,
+      text: 'Статистика оценок студента',
+    },
+  },
 };
+
+const labels = [2, 3, 4, 5] as [2, 3, 4, 5];
 
 export const AttemptByStudentPageContainer: FC<PageContainerProps> = ({ studentId }) => {
   const {
@@ -27,31 +44,16 @@ export const AttemptByStudentPageContainer: FC<PageContainerProps> = ({ studentI
   const { currentData: student } = useGetUserQuery(studentId);
   const { currentData: testsStats } = useGetUserTestsStatsQuery(studentId);
 
+  const chartData: ChartData<'bar'> = {
+    labels: labels,
+    datasets: [{ data: testsStats ? labels.map(label => testsStats[label]) : [] }],
+  };
+
   return (
     <main className='flex flex-col items-center flex-grow-[1]'>
       <h3 className='text-2xl mt-2 mb-5 text-center'>Список попыток у пользователя "{student?.name}"</h3>
 
-      {testsStats && (
-        <PieChart
-          data={Object.entries(testsStats).map(([mark, value]) => ({
-            color: colorByMarks[mark],
-            value,
-            title: `${mark}`,
-          }))}
-          labelPosition={50}
-          className='max-w-[250px]'
-          label={props => {
-            const { title, percentage } = props.dataEntry;
-            return !!percentage && `${title} - ${percentage.toFixed(2)}%`;
-          }}
-          labelStyle={{
-            fontSize: '6px',
-            fontFamily: 'sans-serif',
-            fill: '#121212',
-          }}
-          animate
-        />
-      )}
+      {testsStats && <Bar options={chartOptions} data={chartData} className='h-[250px]' height={80} />}
 
       <AttemptList
         isFetching={isGetAttemptsFetching}

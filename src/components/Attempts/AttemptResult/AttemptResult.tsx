@@ -40,9 +40,9 @@ export const AttemptResultComponent: FC<AttemptResultProps> = ({ attemptResult, 
                     checked={answer.id === question.testHistoryAnswer?.[0].answerId}
                     containerClassName={`inline-flex flex-row-reverse gap-2 ${
                       answer.isRight
-                        ? question.testHistoryAnswer?.[0].answerId === answer.id
-                          ? 'text-[green] font-bold'
-                          : 'text-[red] font-bold'
+                        ? 'text-[green] font-bold'
+                        : answer.id === question.testHistoryAnswer?.[0].answerId
+                        ? 'text-[red] font-bold'
                         : ''
                     }`}
                     disabled

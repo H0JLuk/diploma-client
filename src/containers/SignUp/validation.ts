@@ -1,11 +1,13 @@
 import * as yup from 'yup';
 
+import { validationErrors } from '@/constants/validationErrors';
+
 export const validationSchema = yup.object().shape({
-  name: yup.string().required().min(4),
-  login: yup.string().required().email(),
-  password: yup.string().required().min(4),
+  name: yup.string().required(validationErrors.required).min(4, validationErrors.minLength(4)),
+  login: yup.string().required(validationErrors.required).email(validationErrors.email),
+  password: yup.string().required(validationErrors.required).min(4, validationErrors.minLength(4)),
   confirmPassword: yup
     .string()
-    .required()
-    .oneOf([yup.ref('password')], 'Passwords must match'),
+    .required(validationErrors.required)
+    .oneOf([yup.ref('password')], 'Пароли должны совпадать'),
 });

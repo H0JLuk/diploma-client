@@ -14,7 +14,7 @@ export const validationSchema = yup.lazy(map =>
         })
         .test(
           'text answer or select answer',
-          'Answer is required',
+          'Ответ обязательный',
           obj => !!((typeof obj.answer === 'string' && obj.answer.length) || obj.answerId),
         ),
     ),

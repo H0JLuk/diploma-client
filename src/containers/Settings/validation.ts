@@ -7,8 +7,8 @@ export const validationSchema = Joi.object({
     .pattern(/^[^\s]{4,30}$/)
     .allow('')
     .messages({
-      'string.min': '"old password" should have a minimum length of {$limit}',
-      'string.pattern.base': '"old password" should contain a min 4 non spacing chars',
+      'string.min': '"Старый пароль" должен быть не короче {$limit} символов',
+      'string.pattern.base': 'Старый пароль не должен быть короче 4 символов',
     }),
   newPassword: Joi.when('oldPassword', {
     is: ([value]: [string]) => !!value.length,
@@ -17,10 +17,10 @@ export const validationSchema = Joi.object({
 
       .pattern(/^[^\s]{4,30}$/)
       .messages({
-        'string.required': '"old password" should not be empty for password change',
-        'string.min': '"old password" should have a minimum length of {$limit}',
-        'string.pattern.base': '"old password" should contain a min 4 non spacing chars',
+        'string.required': '"Старый пароль" не должен быть пустым для смены пароля',
+        'string.min': '"Старый пароль" должен иметь минимальную длину {$limit} символов',
+        'string.pattern.base': 'Новый пароль не должен быть короче 4 символов',
       }),
-    otherwise: Joi.valid('').messages({ 'string.valid': '"old password" should be filled' }),
+    otherwise: Joi.valid('').messages({ 'string.valid': '"Старый пароль" должен быть заполнен' }),
   }),
 });

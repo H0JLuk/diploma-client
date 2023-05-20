@@ -21,7 +21,7 @@ const signUpRoute = { name: 'Зарегистрироваться', href: Routes
 const settingsRoute = { name: 'Настройки', href: Routes.SETTINGS };
 const subjectsRoute = { name: 'Предметы', href: Routes.HOME };
 const testsRoute = { name: 'Тесты', href: Routes.TESTS };
-const attemptsRoute = { name: 'Попытки прохождения', href: Routes.ATTEMPTS };
+const attemptsRoute = { name: 'Попытки тестирований', href: Routes.ATTEMPTS };
 const studentsRoute = { name: 'Студенты', href: Routes.STUDENTS };
 const usersRoute = { name: 'Пользователи', href: Routes.USERS };
 

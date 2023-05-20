@@ -19,9 +19,9 @@ export type TestFormValues = {
   startTime: Date;
   endTime: Date;
   duration?: number;
-  scoreFor3: number;
-  scoreFor4: number;
-  scoreFor5: number;
+  scoreFor3?: number;
+  scoreFor4?: number;
+  scoreFor5?: number;
   isRandomAnswers: boolean;
   hidden: boolean;
   subjectId?: number;

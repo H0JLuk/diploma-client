@@ -62,7 +62,7 @@ export const UserItem: FC<UserItemProps> = ({ user, isFetching, onBanUser, onCha
               onClick={() => router.push(`${Routes.ATTEMPTS}/users/${user.id}`)}
               className='mt-4 self-start inline-block'
             >
-              Открыть статистику тестирований
+              Открыть статистику
             </Button>
           )}
         </div>

@@ -37,7 +37,7 @@ export const CreateTestPageContainer: FC = () => {
   const handleSave = async (data: CreateTestDto | UpdateTestDto) => {
     if (isCreateTestDto(data)) {
       const { id: testId } = await createTestMutation(data).unwrap();
-      alert(`Test "${data.name}" is created!`);
+      alert(`Тест "${data.name}" создан!`);
       router.push(`${Routes.TESTS}/edit/${testId}`);
     }
   };

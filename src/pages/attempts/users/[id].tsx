@@ -12,7 +12,7 @@ type AttemptPageProps = {
 const AttemptByStudentPage: NextPage<AttemptPageProps> = ({ studentId }) => (
   <>
     <Head>
-      <title>Test attempt by user</title>
+      <title>Попытка тестирования пользователя</title>
     </Head>
     <RootLayout>
       <AuthLayout pagePermission='methodist-admin'>

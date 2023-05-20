@@ -104,9 +104,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <Input
         {...formMethods.register('scoreFor3')}
-        labelText='Количество баллов для отметки "3"'
+        labelText='Количество баллов для отметки "удовлетворительно"'
         customClass='w-full'
-        placeholder='Введите количество баллов для отметки "3"'
+        placeholder='Введите количество баллов для отметки "удовлетворительно"'
         id='min-3-score'
         type='number'
         error={formMethods.formState.errors.scoreFor3?.message}
@@ -114,9 +114,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <Input
         {...formMethods.register('scoreFor4')}
-        labelText='Количество баллов для отметки "4"'
+        labelText='Количество баллов для отметки "хорошо"'
         customClass='w-full'
-        placeholder='Введите количество баллов для отметки "4"'
+        placeholder='Введите количество баллов для отметки "хорошо"'
         id='min-4-score'
         type='number'
         error={formMethods.formState.errors.scoreFor4?.message}
@@ -124,9 +124,9 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
 
       <Input
         {...formMethods.register('scoreFor5')}
-        labelText='Количество баллов для отметки "5"'
+        labelText='Количество баллов для отметки "отлично"'
         customClass='w-full'
-        placeholder='Введите количество баллов для отметки "5"'
+        placeholder='Введите количество баллов для отметки "отлично"'
         id='min-5-score'
         type='number'
         error={formMethods.formState.errors.scoreFor5?.message}
@@ -149,7 +149,7 @@ export const CreateEditTestForm: FC<CreateEditTestFormProps> = ({ defaultFormVal
         error={formMethods.formState.errors.hidden?.message}
       />
 
-      <h5 className='text-center text-[22px] mb-5'>Questions:</h5>
+      <h5 className='text-center text-[22px] mb-5'>Вопросы:</h5>
 
       <QuestionListForm formMethods={formMethods} />
 

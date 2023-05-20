@@ -18,8 +18,8 @@ const defaultQuestion: TestFormValues['questions'][number] = {
 };
 
 const questionTypeOptions = [
-  { value: 'input', label: 'text answer' },
-  { value: 'single', label: 'choice of answer' },
+  { value: 'input', label: 'Текстовый вопрос' },
+  { value: 'single', label: 'Выбор ответа' },
 ];
 
 export const QuestionListForm: FC<QuestionListFormProps> = ({ formMethods }) => {
@@ -83,7 +83,7 @@ export const QuestionListForm: FC<QuestionListFormProps> = ({ formMethods }) => 
       </ul>
 
       <Button className='self-start' onClick={() => appendQuestion(defaultQuestion)}>
-        Add question
+        Добавить вопрос
       </Button>
     </div>
   );

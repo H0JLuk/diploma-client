@@ -44,7 +44,7 @@ export const PassingAttempt: FC<PassingAttemptProps> = ({ test, attempt, isLoadi
         ))}
 
         <Button type='submit' isLoading={isLoading} className='justify-center text-[20px] font-semibold my-4'>
-          Finish test and save answers
+          Завершить тест и сохранить ответы
         </Button>
       </form>
     </div>

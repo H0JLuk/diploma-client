@@ -73,9 +73,9 @@ export const TestItem: FC<TestItemProps> = ({
             <Button
               isLoading={isStartTestAttemptLoading}
               onClick={handleTestPassingClick}
-              className='mt-4 self-start inline-block'
+              className='mt-4 self-start inline-block self-end'
             >
-              Начать прохождение теста
+              Начать тест
             </Button>
           ) : (
             <p className='mt-4 text-[grey]'>Для прохождения теста вам необходимо зарегистрироваться</p>
